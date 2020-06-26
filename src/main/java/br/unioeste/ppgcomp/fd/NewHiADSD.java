@@ -180,47 +180,71 @@ public class NewHiADSD  extends CrashProtocol {
         return (int) (Math.log(v)/Math.log(2));
     }
 
+    /***
+     *
+     * @param i nó a ser verificado
+     * @param s cluster que será utilizado
+     * @return -1 se não encontrar nenhum nó livre de falhas; o número do processo vizinho do nó i
+     */
+
+    public int ff_neighboor(int i, int s){
+        List<Integer> elements = new ArrayList<Integer>();
+
+        cis(elements, i, s);
+
+        // procura primeiro elemento no cluster J que seja livre de falhas
+        int n = 0;
+        do {
+            if (states[elements.get(n)] == STATE.FAULT_FREE)
+                return elements.get(n);
+            n++;
+        } while (n < elements.size());
+
+        // Nenhum vizinho sem falha encontrado
+        return -1;
+    }
+
+    /***
+     *
+     * @param p nó do hipercube em que será obtida a vizinhança
+     * @param h quantidade de clusters do hipercubo que será obtido os processos diretamente conectados
+     * @return Lista de inteiros com o vizinhos
+     */
+    public List<Integer> neighborhood(int p, int h){
+        List<Integer> elements = new ArrayList<Integer>();
+
+        // Verifica todos os cluster de 1 até h
+        for (int i = 1; i <= h; i++) {
+            int e = ff_neighboor(p,i);
+            elements.add(e);
+        }
+
+        return elements;
+    }
+
     @Override
     public void run() {
         double simulation_time = NekoSystem.instance().getConfig().getDouble("simulation.time");
 
         List<Integer> elementsI = new ArrayList<Integer>();
-        List<Integer> elementsJ = new ArrayList<Integer>();
         List<Integer> responses = new ArrayList<Integer>();
 
 
         // Loop de repetição do relógio
         while (process.clock() < simulation_time) {
-
             if (isCrashed())
                 return;
 
             responses.clear();
-
-
             // de  1 até o número de dimensões do hipercubo
             for (int i = 1; i <= log2(np); i++) {
-
                 elementsI.clear();
                 cis(elementsI, me, i);
-
-                for (int j = 0; j < elementsI.size(); j++) {
-                    elementsJ.clear();
-                    cis(elementsJ, elementsI.get(j), i);
-
-                    // procura primeiro elemento no cluster J que seja livre de falhas
-                    int n = 0;
-                    do {
-                        if (states[elementsJ.get(n)] == STATE.FAULT_FREE)
-                            break;
-                        n++;
-                    } while (n < elementsJ.size());
-
-
+                for (int j : elementsI) {
                     // Verifica i é o primeiro elemento livre de falha
-                    if (n < elementsJ.size() && elementsJ.get(n) == me && states[elementsI.get(n)] == STATE.FAULT_FREE) {
-                        responses.add(elementsI.get(n));
-                        NekoMessage m = new NekoMessage(new int[]{elementsI.get(n)}, FailureDetectorInitializer.PROTOCOL_NAME, null, ARE_YOU_ALIVE);
+                    if (ff_neighboor(j,i) == me && states[j] == STATE.FAULT_FREE) {
+                        responses.add(j);
+                        NekoMessage m = new NekoMessage(new int[]{j}, FailureDetectorInitializer.PROTOCOL_NAME, null, ARE_YOU_ALIVE);
                         send(m);
 
                     }
@@ -229,11 +253,10 @@ public class NewHiADSD  extends CrashProtocol {
             // Checa as respostas
             for (Integer p : responses) {
                 checkResponse(p);
-                        //logger.fine(String.format("Testou %s No cluster %s, ts = %s", elementsI.get(n), i, Arrays.toString(ts)));
             }
 
             // Exibe timestamps resultantes
-            logger.info(String.format("P%s: No tempo %s, ts = %s", me,process.clock(),Arrays.toString(ts)));
+            //logger.info(String.format("P%s: No tempo %s, ts = %s", me,process.clock(),Arrays.toString(ts)));
 
             try {
                 sleep(INTERVAL);
@@ -303,4 +326,15 @@ public class NewHiADSD  extends CrashProtocol {
         }
     }
 
+    public int cluster(int i, int j){
+        return MSB(i,j) + 1;
+    }
+
+    public int MSB(int i, int j) {
+        int s = 0;
+        for (int k = i ^ j; k > 0; k = k >> 1) {
+            s++;
+        }
+        return --s;
+    }
 }
