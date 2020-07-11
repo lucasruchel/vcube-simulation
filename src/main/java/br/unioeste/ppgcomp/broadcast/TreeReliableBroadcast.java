@@ -3,6 +3,7 @@ package br.unioeste.ppgcomp.broadcast;
 import br.unioeste.ppgcomp.data.AckData;
 import br.unioeste.ppgcomp.data.TreeData;
 import br.unioeste.ppgcomp.fault.CrashProtocol;
+import br.unioeste.ppgcomp.overlay.VCube;
 import lse.neko.*;
 import lse.neko.failureDetectors.FailureDetectorListener;
 
@@ -19,6 +20,7 @@ public class TreeReliableBroadcast extends CrashProtocol
     private List<Integer> corrects;
 
     private List<TreeData> delivered;
+    private VCube vcube;
 
     private int timestamp;
     private int np;
@@ -54,10 +56,13 @@ public class TreeReliableBroadcast extends CrashProtocol
         for (int i = 0; i < np; i++) {
             corrects.add(i);
         }
+
+        vcube = new VCube(log2(np));
+        vcube.setCorrects(corrects);
     }
 
     public void broadcast(TreeData data){
-        List<Integer> dests = neighborhood(data.getSource(),log2(np));
+        List<Integer> dests = vcube.neighborhood(data.getSource(),log2(np));
 
 
         if (data.getSource() == me && !delivered.contains(data)){
@@ -67,8 +72,8 @@ public class TreeReliableBroadcast extends CrashProtocol
 
 
         for (int j: dests){
-            if (j == me)
-                continue;
+           // if (j == me)
+           //     continue;
 
             NekoMessage mj = new NekoMessage(me,new int[]{j},getId(),data,TREE);
             send(mj);
@@ -93,7 +98,7 @@ public class TreeReliableBroadcast extends CrashProtocol
 
                 timestamp++;
 
-                TreeData data = new TreeData(timestamp,me,"Olá");
+                TreeData data = new TreeData(timestamp,me,me);
 
                 broadcast(data);
 
@@ -149,7 +154,7 @@ public class TreeReliableBroadcast extends CrashProtocol
                 }
             }
 
-            int k = ff_neighboor(me, (cluster(me, p)) );
+            int k = vcube.ff_neighboor(me, (vcube.cluster(me, p)) );
 
 
 
@@ -174,60 +179,7 @@ public class TreeReliableBroadcast extends CrashProtocol
         return (int) (Math.log(v)/Math.log(2));
     }
 
-    /***
-     *
-     * @param i nó a ser verificado
-     * @param s cluster que será utilizado
-     * @return -1 se não encontrar nenhum nó livre de falhas; o número do processo vizinho do nó i
-     */
 
-    public int ff_neighboor(int i, int s){
-        List<Integer> elements = new ArrayList<Integer>();
-
-        cis(elements, i, s);
-
-        // procura primeiro elemento no cluster J que seja livre de falhas
-        int n = 0;
-        do {
-            if (corrects.contains(elements.get(n)))
-                return elements.get(n);
-            n++;
-        } while (n < elements.size());
-
-        // Nenhum vizinho sem falha encontrado
-        return -1;
-    }
-
-    /***
-     *
-     * @param p nó do hipercube em que será obtida a vizinhança
-     * @param h quantidade de clusters do hipercubo que será obtido os processos diretamente conectados
-     * @return Lista de inteiros com o vizinhos
-     */
-    public List<Integer> neighborhood(int p, int h){
-        List<Integer> elements = new ArrayList<Integer>();
-
-        // Verifica todos os cluster de 1 até h
-        for (int i = 1; i <= h; i++) {
-            int e = ff_neighboor(p,i);
-            if (e != -1)
-                elements.add(e);
-        }
-
-        return elements;
-    }
-
-    public int cluster(int i, int j){
-        return (MSB(i,j) + 1);
-    }
-
-    public int MSB(int i, int j) {
-        int s = 0;
-        for (int k = i ^ j; k > 0; k = k >> 1) {
-            s++;
-        }
-        return --s;
-    }
 
     @Override
     public void deliver(NekoMessage m) {
@@ -252,9 +204,9 @@ public class TreeReliableBroadcast extends CrashProtocol
             }
 
             //int source = ms.getSource();
-            int c = (cluster(m.getSource(),me) - 1);
+            int c = (vcube.cluster(m.getSource(),me) - 1);
 
-            List<Integer> childs = neighborhood(me, c);
+            List<Integer> childs = vcube.neighborhood(me, c);
 
             for (int k: childs){
                 NekoMessage message = new NekoMessage(me,new int[]{k},getId(),ms,TREE);
@@ -280,18 +232,5 @@ public class TreeReliableBroadcast extends CrashProtocol
                 checkAcks(ack.getSource(),data);
             }
         }
-    }
-
-    public void cis(List<Integer> elements, int id, int cluster){
-        // Primeiro elemento do cluster
-        int xor = id ^ (int)(Math.pow(2, cluster - 1));
-
-        // Adiciona elemento ao cluster
-        elements.add(xor);
-
-        for (int i = 1; i <= cluster - 1; i++) {
-            cis(elements,xor,i);
-        }
-
     }
 }

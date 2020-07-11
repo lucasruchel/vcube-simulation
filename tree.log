@@ -1,718 +1,336 @@
-0,000 p0 messages e s p0 p1 ARE_YOU_ALIVE null
-0,000 p0 messages e s p0 p2 ARE_YOU_ALIVE null
-0,000 p0 messages e s p0 p4 ARE_YOU_ALIVE null
-0,000 p0 messages P0: DELIVERED em broadcast m=TreeData{ts=1, source=0, data=Olá}
-0,000 p0 messages e s p0 p1 TREE TreeData{ts=1, source=0, data=Olá}
-0,000 p0 messages e s p0 p2 TREE TreeData{ts=1, source=0, data=Olá}
-0,000 p0 messages e s p0 p4 TREE TreeData{ts=1, source=0, data=Olá}
-0,000 p1 messages e s p1 p0 ARE_YOU_ALIVE null
-0,000 p1 messages e s p1 p3 ARE_YOU_ALIVE null
-0,000 p1 messages e s p1 p5 ARE_YOU_ALIVE null
-0,000 p2 messages e s p2 p3 ARE_YOU_ALIVE null
-0,000 p2 messages e s p2 p0 ARE_YOU_ALIVE null
-0,000 p2 messages e s p2 p6 ARE_YOU_ALIVE null
-0,000 p3 messages e s p3 p2 ARE_YOU_ALIVE null
-0,000 p3 messages e s p3 p1 ARE_YOU_ALIVE null
-0,000 p3 messages e s p3 p7 ARE_YOU_ALIVE null
-0,000 p4 messages e s p4 p5 ARE_YOU_ALIVE null
-0,000 p4 messages e s p4 p6 ARE_YOU_ALIVE null
-0,000 p4 messages e s p4 p0 ARE_YOU_ALIVE null
-0,000 p5 messages e s p5 p4 ARE_YOU_ALIVE null
-0,000 p5 messages e s p5 p7 ARE_YOU_ALIVE null
-0,000 p5 messages e s p5 p1 ARE_YOU_ALIVE null
-0,000 p6 messages e s p6 p7 ARE_YOU_ALIVE null
-0,000 p6 messages e s p6 p4 ARE_YOU_ALIVE null
-0,000 p6 messages e s p6 p2 ARE_YOU_ALIVE null
-0,000 p7 messages e s p7 p6 ARE_YOU_ALIVE null
-0,000 p7 messages e s p7 p5 ARE_YOU_ALIVE null
-0,000 p7 messages e s p7 p3 ARE_YOU_ALIVE null
-1,000 p1 messages e r p0 p1 ARE_YOU_ALIVE null
-1,000 p1 messages e s p1 p0 I_AM_ALIVE [0,0,-1,-1,-1,-1,-1,-1]
-1,000 p2 messages e r p0 p2 ARE_YOU_ALIVE null
-1,000 p2 messages e s p2 p0 I_AM_ALIVE [0,-1,0,-1,-1,-1,-1,-1]
-1,000 p4 messages e r p0 p4 ARE_YOU_ALIVE null
-1,000 p4 messages e s p4 p0 I_AM_ALIVE [0,-1,-1,-1,0,-1,-1,-1]
-1,000 p1 messages e r p0 p1 TREE TreeData{ts=1, source=0, data=Olá}
-1,000 p1 messages P1: DELIVERED em receive m=TreeData{ts=1, source=0, data=Olá}
-1,000 p1 messages e s p1 p0 ACK TreeData{ts=1, source=0, data=Olá}
-1,000 p1 messages P1: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-1,000 p2 messages e r p0 p2 TREE TreeData{ts=1, source=0, data=Olá}
-1,000 p2 messages P2: DELIVERED em receive m=TreeData{ts=1, source=0, data=Olá}
-1,000 p2 messages e s p2 p3 TREE TreeData{ts=1, source=0, data=Olá}
-1,000 p4 messages e r p0 p4 TREE TreeData{ts=1, source=0, data=Olá}
-1,000 p4 messages P4: DELIVERED em receive m=TreeData{ts=1, source=0, data=Olá}
-1,000 p4 messages e s p4 p5 TREE TreeData{ts=1, source=0, data=Olá}
-1,000 p4 messages e s p4 p6 TREE TreeData{ts=1, source=0, data=Olá}
-1,000 p0 messages e r p1 p0 ARE_YOU_ALIVE null
-1,000 p0 messages e s p0 p1 I_AM_ALIVE [0,0,-1,-1,-1,-1,-1,-1]
-1,000 p3 messages e r p1 p3 ARE_YOU_ALIVE null
-1,000 p3 messages e s p3 p1 I_AM_ALIVE [-1,0,-1,0,-1,-1,-1,-1]
-1,000 p5 messages e r p1 p5 ARE_YOU_ALIVE null
-1,000 p5 messages e s p5 p1 I_AM_ALIVE [-1,0,-1,-1,-1,0,-1,-1]
-1,000 p3 messages e r p2 p3 ARE_YOU_ALIVE null
-1,000 p3 messages e s p3 p2 I_AM_ALIVE [-1,0,0,0,-1,-1,-1,-1]
-1,000 p0 messages e r p2 p0 ARE_YOU_ALIVE null
-1,000 p0 messages e s p0 p2 I_AM_ALIVE [0,0,0,-1,-1,-1,-1,-1]
-1,000 p6 messages e r p2 p6 ARE_YOU_ALIVE null
-1,000 p6 messages e s p6 p2 I_AM_ALIVE [-1,-1,0,-1,-1,-1,0,-1]
-1,000 p2 messages e r p3 p2 ARE_YOU_ALIVE null
-1,000 p2 messages e s p2 p3 I_AM_ALIVE [0,-1,0,0,-1,-1,-1,-1]
-1,000 p1 messages e r p3 p1 ARE_YOU_ALIVE null
-1,000 p1 messages e s p1 p3 I_AM_ALIVE [0,0,-1,0,-1,-1,-1,-1]
-1,000 p7 messages e r p3 p7 ARE_YOU_ALIVE null
-1,000 p7 messages e s p7 p3 I_AM_ALIVE [-1,-1,-1,0,-1,-1,-1,0]
-1,000 p5 messages e r p4 p5 ARE_YOU_ALIVE null
-1,000 p5 messages e s p5 p4 I_AM_ALIVE [-1,0,-1,-1,0,0,-1,-1]
-1,000 p6 messages e r p4 p6 ARE_YOU_ALIVE null
-1,000 p6 messages e s p6 p4 I_AM_ALIVE [-1,-1,0,-1,0,-1,0,-1]
-1,000 p0 messages e r p4 p0 ARE_YOU_ALIVE null
-1,000 p0 messages e s p0 p4 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-1,000 p4 messages e r p5 p4 ARE_YOU_ALIVE null
-1,000 p4 messages e s p4 p5 I_AM_ALIVE [0,-1,-1,-1,0,0,-1,-1]
-1,000 p7 messages e r p5 p7 ARE_YOU_ALIVE null
-1,000 p7 messages e s p7 p5 I_AM_ALIVE [-1,-1,-1,0,-1,0,-1,0]
-1,000 p1 messages e r p5 p1 ARE_YOU_ALIVE null
-1,000 p1 messages e s p1 p5 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-1,000 p7 messages e r p6 p7 ARE_YOU_ALIVE null
-1,000 p7 messages e s p7 p6 I_AM_ALIVE [-1,-1,-1,0,-1,0,0,0]
-1,000 p4 messages e r p6 p4 ARE_YOU_ALIVE null
-1,000 p4 messages e s p4 p6 I_AM_ALIVE [0,-1,-1,-1,0,0,0,-1]
-1,000 p2 messages e r p6 p2 ARE_YOU_ALIVE null
-1,000 p2 messages e s p2 p6 I_AM_ALIVE [0,-1,0,0,-1,-1,0,-1]
-1,000 p6 messages e r p7 p6 ARE_YOU_ALIVE null
-1,000 p6 messages e s p6 p7 I_AM_ALIVE [-1,-1,0,-1,0,-1,0,0]
-1,000 p5 messages e r p7 p5 ARE_YOU_ALIVE null
-1,000 p5 messages e s p5 p7 I_AM_ALIVE [-1,0,-1,-1,0,0,-1,0]
-1,000 p3 messages e r p7 p3 ARE_YOU_ALIVE null
-1,000 p3 messages e s p3 p7 I_AM_ALIVE [-1,0,0,0,-1,-1,-1,0]
-2,000 p0 messages e r p1 p0 I_AM_ALIVE [0,0,-1,-1,-1,-1,-1,-1]
-2,000 p0 messages e r p2 p0 I_AM_ALIVE [0,-1,0,-1,-1,-1,-1,-1]
-2,000 p0 messages e r p4 p0 I_AM_ALIVE [0,-1,-1,-1,0,-1,-1,-1]
-2,000 p0 messages e r p1 p0 ACK TreeData{ts=1, source=0, data=Olá}
-2,000 p3 messages e r p2 p3 TREE TreeData{ts=1, source=0, data=Olá}
-2,000 p3 messages P3: DELIVERED em receive m=TreeData{ts=1, source=0, data=Olá}
-2,000 p3 messages e s p3 p2 ACK TreeData{ts=1, source=0, data=Olá}
-2,000 p3 messages P3: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-2,000 p5 messages e r p4 p5 TREE TreeData{ts=1, source=0, data=Olá}
-2,000 p5 messages P5: DELIVERED em receive m=TreeData{ts=1, source=0, data=Olá}
-2,000 p5 messages e s p5 p4 ACK TreeData{ts=1, source=0, data=Olá}
-2,000 p5 messages P5: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-2,000 p6 messages e r p4 p6 TREE TreeData{ts=1, source=0, data=Olá}
-2,000 p6 messages P6: DELIVERED em receive m=TreeData{ts=1, source=0, data=Olá}
-2,000 p6 messages e s p6 p7 TREE TreeData{ts=1, source=0, data=Olá}
-2,000 p1 messages e r p0 p1 I_AM_ALIVE [0,0,-1,-1,-1,-1,-1,-1]
-2,000 p1 messages e r p3 p1 I_AM_ALIVE [-1,0,-1,0,-1,-1,-1,-1]
-2,000 p1 messages e r p5 p1 I_AM_ALIVE [-1,0,-1,-1,-1,0,-1,-1]
-2,000 p2 messages e r p3 p2 I_AM_ALIVE [-1,0,0,0,-1,-1,-1,-1]
-2,000 p2 messages e r p0 p2 I_AM_ALIVE [0,0,0,-1,-1,-1,-1,-1]
-2,000 p2 messages e r p6 p2 I_AM_ALIVE [-1,-1,0,-1,-1,-1,0,-1]
-2,000 p3 messages e r p2 p3 I_AM_ALIVE [0,-1,0,0,-1,-1,-1,-1]
-2,000 p3 messages e r p1 p3 I_AM_ALIVE [0,0,-1,0,-1,-1,-1,-1]
-2,000 p3 messages e r p7 p3 I_AM_ALIVE [-1,-1,-1,0,-1,-1,-1,0]
-2,000 p4 messages e r p5 p4 I_AM_ALIVE [-1,0,-1,-1,0,0,-1,-1]
-2,000 p4 messages e r p6 p4 I_AM_ALIVE [-1,-1,0,-1,0,-1,0,-1]
-2,000 p4 messages e r p0 p4 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-2,000 p5 messages e r p4 p5 I_AM_ALIVE [0,-1,-1,-1,0,0,-1,-1]
-2,000 p5 messages e r p7 p5 I_AM_ALIVE [-1,-1,-1,0,-1,0,-1,0]
-2,000 p5 messages e r p1 p5 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-2,000 p6 messages e r p7 p6 I_AM_ALIVE [-1,-1,-1,0,-1,0,0,0]
-2,000 p6 messages e r p4 p6 I_AM_ALIVE [0,-1,-1,-1,0,0,0,-1]
-2,000 p6 messages e r p2 p6 I_AM_ALIVE [0,-1,0,0,-1,-1,0,-1]
-2,000 p7 messages e r p6 p7 I_AM_ALIVE [-1,-1,0,-1,0,-1,0,0]
-2,000 p7 messages e r p5 p7 I_AM_ALIVE [-1,0,-1,-1,0,0,-1,0]
-2,000 p7 messages e r p3 p7 I_AM_ALIVE [-1,0,0,0,-1,-1,-1,0]
-3,000 p2 messages e r p3 p2 ACK TreeData{ts=1, source=0, data=Olá}
-3,000 p2 messages e s p2 p0 ACK TreeData{ts=1, source=0, data=Olá}
-3,000 p2 messages P2: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-3,000 p4 messages e r p5 p4 ACK TreeData{ts=1, source=0, data=Olá}
-3,000 p7 messages e r p6 p7 TREE TreeData{ts=1, source=0, data=Olá}
-3,000 p7 messages P7: DELIVERED em receive m=TreeData{ts=1, source=0, data=Olá}
-3,000 p7 messages e s p7 p6 ACK TreeData{ts=1, source=0, data=Olá}
-3,000 p7 messages P7: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-3,000 p0 messages e s p0 p1 ARE_YOU_ALIVE null
-3,000 p0 messages e s p0 p2 ARE_YOU_ALIVE null
-3,000 p0 messages e s p0 p4 ARE_YOU_ALIVE null
-3,000 p1 messages e s p1 p0 ARE_YOU_ALIVE null
-3,000 p1 messages e s p1 p3 ARE_YOU_ALIVE null
-3,000 p1 messages e s p1 p5 ARE_YOU_ALIVE null
-3,000 p2 messages e s p2 p3 ARE_YOU_ALIVE null
-3,000 p2 messages e s p2 p0 ARE_YOU_ALIVE null
-3,000 p2 messages e s p2 p6 ARE_YOU_ALIVE null
-3,000 p3 messages e s p3 p2 ARE_YOU_ALIVE null
-3,000 p3 messages e s p3 p1 ARE_YOU_ALIVE null
-3,000 p3 messages e s p3 p7 ARE_YOU_ALIVE null
-3,000 p4 messages e s p4 p5 ARE_YOU_ALIVE null
-3,000 p4 messages e s p4 p6 ARE_YOU_ALIVE null
-3,000 p4 messages e s p4 p0 ARE_YOU_ALIVE null
-3,000 p5 messages e s p5 p4 ARE_YOU_ALIVE null
-3,000 p5 messages e s p5 p7 ARE_YOU_ALIVE null
-3,000 p5 messages e s p5 p1 ARE_YOU_ALIVE null
-3,000 p6 messages e s p6 p7 ARE_YOU_ALIVE null
-3,000 p6 messages e s p6 p4 ARE_YOU_ALIVE null
-3,000 p6 messages e s p6 p2 ARE_YOU_ALIVE null
-3,000 p7 messages e s p7 p6 ARE_YOU_ALIVE null
-3,000 p7 messages e s p7 p5 ARE_YOU_ALIVE null
-3,000 p7 messages e s p7 p3 ARE_YOU_ALIVE null
-4,000 p0 messages e r p2 p0 ACK TreeData{ts=1, source=0, data=Olá}
-4,000 p6 messages e r p7 p6 ACK TreeData{ts=1, source=0, data=Olá}
-4,000 p6 messages e s p6 p4 ACK TreeData{ts=1, source=0, data=Olá}
-4,000 p6 messages P6: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-4,000 p1 messages e r p0 p1 ARE_YOU_ALIVE null
-4,000 p1 messages e s p1 p0 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-4,000 p2 messages e r p0 p2 ARE_YOU_ALIVE null
-4,000 p2 messages e s p2 p0 I_AM_ALIVE [0,0,0,0,-1,-1,0,-1]
-4,000 p4 messages e r p0 p4 ARE_YOU_ALIVE null
-4,000 p4 messages e s p4 p0 I_AM_ALIVE [0,0,0,-1,0,0,0,-1]
-4,000 p0 messages e r p1 p0 ARE_YOU_ALIVE null
-4,000 p0 messages e s p0 p1 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-4,000 p3 messages e r p1 p3 ARE_YOU_ALIVE null
-4,000 p3 messages e s p3 p1 I_AM_ALIVE [0,0,0,0,-1,-1,-1,0]
-4,000 p5 messages e r p1 p5 ARE_YOU_ALIVE null
-4,000 p5 messages e s p5 p1 I_AM_ALIVE [0,0,-1,0,0,0,-1,0]
-4,000 p3 messages e r p2 p3 ARE_YOU_ALIVE null
-4,000 p3 messages e s p3 p2 I_AM_ALIVE [0,0,0,0,-1,-1,-1,0]
-4,000 p0 messages e r p2 p0 ARE_YOU_ALIVE null
-4,000 p0 messages e s p0 p2 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-4,000 p6 messages e r p2 p6 ARE_YOU_ALIVE null
-4,000 p6 messages e s p6 p2 I_AM_ALIVE [0,-1,0,0,0,0,0,0]
-4,000 p2 messages e r p3 p2 ARE_YOU_ALIVE null
-4,000 p2 messages e s p2 p3 I_AM_ALIVE [0,0,0,0,-1,-1,0,-1]
-4,000 p1 messages e r p3 p1 ARE_YOU_ALIVE null
-4,000 p1 messages e s p1 p3 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-4,000 p7 messages e r p3 p7 ARE_YOU_ALIVE null
-4,000 p7 messages e s p7 p3 I_AM_ALIVE [-1,0,0,0,0,0,0,0]
-4,000 p5 messages e r p4 p5 ARE_YOU_ALIVE null
-4,000 p5 messages e s p5 p4 I_AM_ALIVE [0,0,-1,0,0,0,-1,0]
-4,000 p6 messages e r p4 p6 ARE_YOU_ALIVE null
-4,000 p6 messages e s p6 p4 I_AM_ALIVE [0,-1,0,0,0,0,0,0]
-4,000 p0 messages e r p4 p0 ARE_YOU_ALIVE null
-4,000 p0 messages e s p0 p4 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-4,000 p4 messages e r p5 p4 ARE_YOU_ALIVE null
-4,000 p4 messages e s p4 p5 I_AM_ALIVE [0,0,0,-1,0,0,0,-1]
-4,000 p7 messages e r p5 p7 ARE_YOU_ALIVE null
-4,000 p7 messages e s p7 p5 I_AM_ALIVE [-1,0,0,0,0,0,0,0]
-4,000 p1 messages e r p5 p1 ARE_YOU_ALIVE null
-4,000 p1 messages e s p1 p5 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-4,000 p7 messages e r p6 p7 ARE_YOU_ALIVE null
-4,000 p7 messages e s p7 p6 I_AM_ALIVE [-1,0,0,0,0,0,0,0]
-4,000 p4 messages e r p6 p4 ARE_YOU_ALIVE null
-4,000 p4 messages e s p4 p6 I_AM_ALIVE [0,0,0,-1,0,0,0,-1]
-4,000 p2 messages e r p6 p2 ARE_YOU_ALIVE null
-4,000 p2 messages e s p2 p6 I_AM_ALIVE [0,0,0,0,-1,-1,0,-1]
-4,000 p6 messages e r p7 p6 ARE_YOU_ALIVE null
-4,000 p6 messages e s p6 p7 I_AM_ALIVE [0,-1,0,0,0,0,0,0]
-4,000 p5 messages e r p7 p5 ARE_YOU_ALIVE null
-4,000 p5 messages e s p5 p7 I_AM_ALIVE [0,0,-1,0,0,0,-1,0]
-4,000 p3 messages e r p7 p3 ARE_YOU_ALIVE null
-4,000 p3 messages e s p3 p7 I_AM_ALIVE [0,0,0,0,-1,-1,-1,0]
-5,000 p4 messages e r p6 p4 ACK TreeData{ts=1, source=0, data=Olá}
-5,000 p4 messages e s p4 p0 ACK TreeData{ts=1, source=0, data=Olá}
-5,000 p4 messages P4: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-5,000 p0 messages e r p1 p0 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-5,000 p0 messages e r p2 p0 I_AM_ALIVE [0,0,0,0,-1,-1,0,-1]
-5,000 p0 messages e r p4 p0 I_AM_ALIVE [0,0,0,-1,0,0,0,-1]
-5,000 p1 messages e r p0 p1 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-5,000 p1 messages e r p3 p1 I_AM_ALIVE [0,0,0,0,-1,-1,-1,0]
-5,000 p1 messages e r p5 p1 I_AM_ALIVE [0,0,-1,0,0,0,-1,0]
-5,000 p2 messages e r p3 p2 I_AM_ALIVE [0,0,0,0,-1,-1,-1,0]
-5,000 p2 messages e r p0 p2 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-5,000 p2 messages e r p6 p2 I_AM_ALIVE [0,-1,0,0,0,0,0,0]
-5,000 p3 messages e r p2 p3 I_AM_ALIVE [0,0,0,0,-1,-1,0,-1]
-5,000 p3 messages e r p1 p3 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-5,000 p3 messages e r p7 p3 I_AM_ALIVE [-1,0,0,0,0,0,0,0]
-5,000 p4 messages e r p5 p4 I_AM_ALIVE [0,0,-1,0,0,0,-1,0]
-5,000 p4 messages e r p6 p4 I_AM_ALIVE [0,-1,0,0,0,0,0,0]
-5,000 p4 messages e r p0 p4 I_AM_ALIVE [0,0,0,-1,0,-1,-1,-1]
-5,000 p5 messages e r p4 p5 I_AM_ALIVE [0,0,0,-1,0,0,0,-1]
-5,000 p5 messages e r p7 p5 I_AM_ALIVE [-1,0,0,0,0,0,0,0]
-5,000 p5 messages e r p1 p5 I_AM_ALIVE [0,0,-1,0,-1,0,-1,-1]
-5,000 p6 messages e r p7 p6 I_AM_ALIVE [-1,0,0,0,0,0,0,0]
-5,000 p6 messages e r p4 p6 I_AM_ALIVE [0,0,0,-1,0,0,0,-1]
-5,000 p6 messages e r p2 p6 I_AM_ALIVE [0,0,0,0,-1,-1,0,-1]
-5,000 p7 messages e r p6 p7 I_AM_ALIVE [0,-1,0,0,0,0,0,0]
-5,000 p7 messages e r p5 p7 I_AM_ALIVE [0,0,-1,0,0,0,-1,0]
-5,000 p7 messages e r p3 p7 I_AM_ALIVE [0,0,0,0,-1,-1,-1,0]
-6,000 p0 messages e r p4 p0 ACK TreeData{ts=1, source=0, data=Olá}
-6,000 p0 messages e s p0 p0 ACK TreeData{ts=1, source=0, data=Olá}
-6,000 p0 messages e r p0 p0 ACK TreeData{ts=1, source=0, data=Olá}
-6,000 p0 messages P0: Todos ACKs entregues do processo com origem em P0 e ts=1 entregues!!
-6,000 p0 messages e s p0 p1 ARE_YOU_ALIVE null
-6,000 p0 messages e s p0 p2 ARE_YOU_ALIVE null
-6,000 p0 messages e s p0 p4 ARE_YOU_ALIVE null
-6,000 p1 messages e s p1 p0 ARE_YOU_ALIVE null
-6,000 p1 messages e s p1 p3 ARE_YOU_ALIVE null
-6,000 p1 messages e s p1 p5 ARE_YOU_ALIVE null
-6,000 p2 messages e s p2 p3 ARE_YOU_ALIVE null
-6,000 p2 messages e s p2 p0 ARE_YOU_ALIVE null
-6,000 p2 messages e s p2 p6 ARE_YOU_ALIVE null
-6,000 p3 messages e s p3 p2 ARE_YOU_ALIVE null
-6,000 p3 messages e s p3 p1 ARE_YOU_ALIVE null
-6,000 p3 messages e s p3 p7 ARE_YOU_ALIVE null
-6,000 p4 messages e s p4 p5 ARE_YOU_ALIVE null
-6,000 p4 messages e s p4 p6 ARE_YOU_ALIVE null
-6,000 p4 messages e s p4 p0 ARE_YOU_ALIVE null
-6,000 p5 messages e s p5 p4 ARE_YOU_ALIVE null
-6,000 p5 messages e s p5 p7 ARE_YOU_ALIVE null
-6,000 p5 messages e s p5 p1 ARE_YOU_ALIVE null
-6,000 p6 messages e s p6 p7 ARE_YOU_ALIVE null
-6,000 p6 messages e s p6 p4 ARE_YOU_ALIVE null
-6,000 p6 messages e s p6 p2 ARE_YOU_ALIVE null
-6,000 p7 messages e s p7 p6 ARE_YOU_ALIVE null
-6,000 p7 messages e s p7 p5 ARE_YOU_ALIVE null
-6,000 p7 messages e s p7 p3 ARE_YOU_ALIVE null
-7,000 p1 messages e r p0 p1 ARE_YOU_ALIVE null
-7,000 p1 messages e s p1 p0 I_AM_ALIVE [0,0,0,0,0,0,-1,0]
-7,000 p2 messages e r p0 p2 ARE_YOU_ALIVE null
-7,000 p2 messages e s p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p4 messages e r p0 p4 ARE_YOU_ALIVE null
-7,000 p4 messages e s p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p0 messages e r p1 p0 ARE_YOU_ALIVE null
-7,000 p0 messages e s p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,-1]
-7,000 p3 messages e r p1 p3 ARE_YOU_ALIVE null
-7,000 p3 messages e s p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p5 messages e r p1 p5 ARE_YOU_ALIVE null
-7,000 p5 messages e s p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p3 messages e r p2 p3 ARE_YOU_ALIVE null
-7,000 p3 messages e s p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p0 messages e r p2 p0 ARE_YOU_ALIVE null
-7,000 p0 messages e s p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,-1]
-7,000 p6 messages e r p2 p6 ARE_YOU_ALIVE null
-7,000 p6 messages e s p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p2 messages e r p3 p2 ARE_YOU_ALIVE null
-7,000 p2 messages e s p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p1 messages e r p3 p1 ARE_YOU_ALIVE null
-7,000 p1 messages e s p1 p3 I_AM_ALIVE [0,0,0,0,0,0,-1,0]
-7,000 p7 messages e r p3 p7 ARE_YOU_ALIVE null
-7,000 p7 messages e s p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p5 messages e r p4 p5 ARE_YOU_ALIVE null
-7,000 p5 messages e s p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p6 messages e r p4 p6 ARE_YOU_ALIVE null
-7,000 p6 messages e s p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p0 messages e r p4 p0 ARE_YOU_ALIVE null
-7,000 p0 messages e s p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,-1]
-7,000 p4 messages e r p5 p4 ARE_YOU_ALIVE null
-7,000 p4 messages e s p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p7 messages e r p5 p7 ARE_YOU_ALIVE null
-7,000 p7 messages e s p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p1 messages e r p5 p1 ARE_YOU_ALIVE null
-7,000 p1 messages e s p1 p5 I_AM_ALIVE [0,0,0,0,0,0,-1,0]
-7,000 p7 messages e r p6 p7 ARE_YOU_ALIVE null
-7,000 p7 messages e s p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p4 messages e r p6 p4 ARE_YOU_ALIVE null
-7,000 p4 messages e s p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p2 messages e r p6 p2 ARE_YOU_ALIVE null
-7,000 p2 messages e s p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p6 messages e r p7 p6 ARE_YOU_ALIVE null
-7,000 p6 messages e s p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p5 messages e r p7 p5 ARE_YOU_ALIVE null
-7,000 p5 messages e s p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-7,000 p3 messages e r p7 p3 ARE_YOU_ALIVE null
-7,000 p3 messages e s p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p0 messages e r p1 p0 I_AM_ALIVE [0,0,0,0,0,0,-1,0]
-8,000 p0 messages e r p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p0 messages e r p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p1 messages e r p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,-1]
-8,000 p1 messages e r p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p1 messages e r p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p2 messages e r p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p2 messages e r p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,-1]
-8,000 p2 messages e r p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p3 messages e r p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p3 messages e r p1 p3 I_AM_ALIVE [0,0,0,0,0,0,-1,0]
-8,000 p3 messages e r p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p4 messages e r p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p4 messages e r p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p4 messages e r p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,-1]
-8,000 p5 messages e r p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p5 messages e r p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p5 messages e r p1 p5 I_AM_ALIVE [0,0,0,0,0,0,-1,0]
-8,000 p6 messages e r p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p6 messages e r p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p6 messages e r p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p7 messages e r p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p7 messages e r p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-8,000 p7 messages e r p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-9,000 p0 messages e s p0 p1 ARE_YOU_ALIVE null
-9,000 p0 messages e s p0 p2 ARE_YOU_ALIVE null
-9,000 p0 messages e s p0 p4 ARE_YOU_ALIVE null
-9,000 p1 messages e s p1 p0 ARE_YOU_ALIVE null
-9,000 p1 messages e s p1 p3 ARE_YOU_ALIVE null
-9,000 p1 messages e s p1 p5 ARE_YOU_ALIVE null
-9,000 p2 messages e s p2 p3 ARE_YOU_ALIVE null
-9,000 p2 messages e s p2 p0 ARE_YOU_ALIVE null
-9,000 p2 messages e s p2 p6 ARE_YOU_ALIVE null
-9,000 p3 messages e s p3 p2 ARE_YOU_ALIVE null
-9,000 p3 messages e s p3 p1 ARE_YOU_ALIVE null
-9,000 p3 messages e s p3 p7 ARE_YOU_ALIVE null
-9,000 p4 messages e s p4 p5 ARE_YOU_ALIVE null
-9,000 p4 messages e s p4 p6 ARE_YOU_ALIVE null
-9,000 p4 messages e s p4 p0 ARE_YOU_ALIVE null
-9,000 p5 messages e s p5 p4 ARE_YOU_ALIVE null
-9,000 p5 messages e s p5 p7 ARE_YOU_ALIVE null
-9,000 p5 messages e s p5 p1 ARE_YOU_ALIVE null
-9,000 p6 messages e s p6 p7 ARE_YOU_ALIVE null
-9,000 p6 messages e s p6 p4 ARE_YOU_ALIVE null
-9,000 p6 messages e s p6 p2 ARE_YOU_ALIVE null
-9,000 p7 messages e s p7 p6 ARE_YOU_ALIVE null
-9,000 p7 messages e s p7 p5 ARE_YOU_ALIVE null
-9,000 p7 messages e s p7 p3 ARE_YOU_ALIVE null
-10,000 p1 messages e r p0 p1 ARE_YOU_ALIVE null
-10,000 p1 messages e s p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p2 messages e r p0 p2 ARE_YOU_ALIVE null
-10,000 p2 messages e s p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p4 messages e r p0 p4 ARE_YOU_ALIVE null
-10,000 p4 messages e s p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p0 messages e r p1 p0 ARE_YOU_ALIVE null
-10,000 p0 messages e s p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p3 messages e r p1 p3 ARE_YOU_ALIVE null
-10,000 p3 messages e s p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p5 messages e r p1 p5 ARE_YOU_ALIVE null
-10,000 p5 messages e s p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p3 messages e r p2 p3 ARE_YOU_ALIVE null
-10,000 p3 messages e s p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p0 messages e r p2 p0 ARE_YOU_ALIVE null
-10,000 p0 messages e s p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p6 messages e r p2 p6 ARE_YOU_ALIVE null
-10,000 p6 messages e s p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p2 messages e r p3 p2 ARE_YOU_ALIVE null
-10,000 p2 messages e s p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p1 messages e r p3 p1 ARE_YOU_ALIVE null
-10,000 p1 messages e s p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p7 messages e r p3 p7 ARE_YOU_ALIVE null
-10,000 p7 messages e s p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p5 messages e r p4 p5 ARE_YOU_ALIVE null
-10,000 p5 messages e s p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p6 messages e r p4 p6 ARE_YOU_ALIVE null
-10,000 p6 messages e s p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p0 messages e r p4 p0 ARE_YOU_ALIVE null
-10,000 p0 messages e s p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p4 messages e r p5 p4 ARE_YOU_ALIVE null
-10,000 p4 messages e s p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p7 messages e r p5 p7 ARE_YOU_ALIVE null
-10,000 p7 messages e s p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p1 messages e r p5 p1 ARE_YOU_ALIVE null
-10,000 p1 messages e s p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p7 messages e r p6 p7 ARE_YOU_ALIVE null
-10,000 p7 messages e s p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p4 messages e r p6 p4 ARE_YOU_ALIVE null
-10,000 p4 messages e s p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p2 messages e r p6 p2 ARE_YOU_ALIVE null
-10,000 p2 messages e s p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p6 messages e r p7 p6 ARE_YOU_ALIVE null
-10,000 p6 messages e s p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p5 messages e r p7 p5 ARE_YOU_ALIVE null
-10,000 p5 messages e s p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-10,000 p3 messages e r p7 p3 ARE_YOU_ALIVE null
-10,000 p3 messages e s p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p0 messages e r p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p0 messages e r p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p0 messages e r p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p1 messages e r p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p1 messages e r p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p1 messages e r p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p2 messages e r p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p2 messages e r p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p2 messages e r p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p3 messages e r p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p3 messages e r p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p3 messages e r p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p4 messages e r p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p4 messages e r p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p4 messages e r p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p5 messages e r p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p5 messages e r p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p5 messages e r p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p6 messages e r p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p6 messages e r p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p6 messages e r p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p7 messages e r p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p7 messages e r p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-11,000 p7 messages e r p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-12,000 p0 messages e s p0 p1 ARE_YOU_ALIVE null
-12,000 p0 messages e s p0 p2 ARE_YOU_ALIVE null
-12,000 p0 messages e s p0 p4 ARE_YOU_ALIVE null
-12,000 p1 messages e s p1 p0 ARE_YOU_ALIVE null
-12,000 p1 messages e s p1 p3 ARE_YOU_ALIVE null
-12,000 p1 messages e s p1 p5 ARE_YOU_ALIVE null
-12,000 p2 messages e s p2 p3 ARE_YOU_ALIVE null
-12,000 p2 messages e s p2 p0 ARE_YOU_ALIVE null
-12,000 p2 messages e s p2 p6 ARE_YOU_ALIVE null
-12,000 p3 messages e s p3 p2 ARE_YOU_ALIVE null
-12,000 p3 messages e s p3 p1 ARE_YOU_ALIVE null
-12,000 p3 messages e s p3 p7 ARE_YOU_ALIVE null
-12,000 p4 messages e s p4 p5 ARE_YOU_ALIVE null
-12,000 p4 messages e s p4 p6 ARE_YOU_ALIVE null
-12,000 p4 messages e s p4 p0 ARE_YOU_ALIVE null
-12,000 p5 messages e s p5 p4 ARE_YOU_ALIVE null
-12,000 p5 messages e s p5 p7 ARE_YOU_ALIVE null
-12,000 p5 messages e s p5 p1 ARE_YOU_ALIVE null
-12,000 p6 messages e s p6 p7 ARE_YOU_ALIVE null
-12,000 p6 messages e s p6 p4 ARE_YOU_ALIVE null
-12,000 p6 messages e s p6 p2 ARE_YOU_ALIVE null
-12,000 p7 messages e s p7 p6 ARE_YOU_ALIVE null
-12,000 p7 messages e s p7 p5 ARE_YOU_ALIVE null
-12,000 p7 messages e s p7 p3 ARE_YOU_ALIVE null
-13,000 p1 messages e r p0 p1 ARE_YOU_ALIVE null
-13,000 p1 messages e s p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p2 messages e r p0 p2 ARE_YOU_ALIVE null
-13,000 p2 messages e s p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p4 messages e r p0 p4 ARE_YOU_ALIVE null
-13,000 p4 messages e s p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p0 messages e r p1 p0 ARE_YOU_ALIVE null
-13,000 p0 messages e s p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p3 messages e r p1 p3 ARE_YOU_ALIVE null
-13,000 p3 messages e s p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p5 messages e r p1 p5 ARE_YOU_ALIVE null
-13,000 p5 messages e s p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p3 messages e r p2 p3 ARE_YOU_ALIVE null
-13,000 p3 messages e s p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p0 messages e r p2 p0 ARE_YOU_ALIVE null
-13,000 p0 messages e s p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p6 messages e r p2 p6 ARE_YOU_ALIVE null
-13,000 p6 messages e s p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p2 messages e r p3 p2 ARE_YOU_ALIVE null
-13,000 p2 messages e s p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p1 messages e r p3 p1 ARE_YOU_ALIVE null
-13,000 p1 messages e s p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p7 messages e r p3 p7 ARE_YOU_ALIVE null
-13,000 p7 messages e s p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p5 messages e r p4 p5 ARE_YOU_ALIVE null
-13,000 p5 messages e s p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p6 messages e r p4 p6 ARE_YOU_ALIVE null
-13,000 p6 messages e s p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p0 messages e r p4 p0 ARE_YOU_ALIVE null
-13,000 p0 messages e s p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p4 messages e r p5 p4 ARE_YOU_ALIVE null
-13,000 p4 messages e s p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p7 messages e r p5 p7 ARE_YOU_ALIVE null
-13,000 p7 messages e s p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p1 messages e r p5 p1 ARE_YOU_ALIVE null
-13,000 p1 messages e s p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p7 messages e r p6 p7 ARE_YOU_ALIVE null
-13,000 p7 messages e s p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p4 messages e r p6 p4 ARE_YOU_ALIVE null
-13,000 p4 messages e s p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p2 messages e r p6 p2 ARE_YOU_ALIVE null
-13,000 p2 messages e s p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p6 messages e r p7 p6 ARE_YOU_ALIVE null
-13,000 p6 messages e s p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p5 messages e r p7 p5 ARE_YOU_ALIVE null
-13,000 p5 messages e s p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-13,000 p3 messages e r p7 p3 ARE_YOU_ALIVE null
-13,000 p3 messages e s p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p0 messages e r p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p0 messages e r p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p0 messages e r p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p1 messages e r p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p1 messages e r p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p1 messages e r p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p2 messages e r p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p2 messages e r p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p2 messages e r p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p3 messages e r p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p3 messages e r p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p3 messages e r p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p4 messages e r p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p4 messages e r p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p4 messages e r p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p5 messages e r p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p5 messages e r p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p5 messages e r p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p6 messages e r p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p6 messages e r p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p6 messages e r p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p7 messages e r p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p7 messages e r p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-14,000 p7 messages e r p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-15,000 p0 messages e s p0 p1 ARE_YOU_ALIVE null
-15,000 p0 messages e s p0 p2 ARE_YOU_ALIVE null
-15,000 p0 messages e s p0 p4 ARE_YOU_ALIVE null
-15,000 p1 messages e s p1 p0 ARE_YOU_ALIVE null
-15,000 p1 messages e s p1 p3 ARE_YOU_ALIVE null
-15,000 p1 messages e s p1 p5 ARE_YOU_ALIVE null
-15,000 p2 messages e s p2 p3 ARE_YOU_ALIVE null
-15,000 p2 messages e s p2 p0 ARE_YOU_ALIVE null
-15,000 p2 messages e s p2 p6 ARE_YOU_ALIVE null
-15,000 p3 messages e s p3 p2 ARE_YOU_ALIVE null
-15,000 p3 messages e s p3 p1 ARE_YOU_ALIVE null
-15,000 p3 messages e s p3 p7 ARE_YOU_ALIVE null
-15,000 p4 messages e s p4 p5 ARE_YOU_ALIVE null
-15,000 p4 messages e s p4 p6 ARE_YOU_ALIVE null
-15,000 p4 messages e s p4 p0 ARE_YOU_ALIVE null
-15,000 p5 messages e s p5 p4 ARE_YOU_ALIVE null
-15,000 p5 messages e s p5 p7 ARE_YOU_ALIVE null
-15,000 p5 messages e s p5 p1 ARE_YOU_ALIVE null
-15,000 p6 messages e s p6 p7 ARE_YOU_ALIVE null
-15,000 p6 messages e s p6 p4 ARE_YOU_ALIVE null
-15,000 p6 messages e s p6 p2 ARE_YOU_ALIVE null
-15,000 p7 messages e s p7 p6 ARE_YOU_ALIVE null
-15,000 p7 messages e s p7 p5 ARE_YOU_ALIVE null
-15,000 p7 messages e s p7 p3 ARE_YOU_ALIVE null
-16,000 p1 messages e r p0 p1 ARE_YOU_ALIVE null
-16,000 p1 messages e s p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p2 messages e r p0 p2 ARE_YOU_ALIVE null
-16,000 p2 messages e s p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p4 messages e r p0 p4 ARE_YOU_ALIVE null
-16,000 p4 messages e s p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p0 messages e r p1 p0 ARE_YOU_ALIVE null
-16,000 p0 messages e s p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p3 messages e r p1 p3 ARE_YOU_ALIVE null
-16,000 p3 messages e s p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p5 messages e r p1 p5 ARE_YOU_ALIVE null
-16,000 p5 messages e s p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p3 messages e r p2 p3 ARE_YOU_ALIVE null
-16,000 p3 messages e s p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p0 messages e r p2 p0 ARE_YOU_ALIVE null
-16,000 p0 messages e s p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p6 messages e r p2 p6 ARE_YOU_ALIVE null
-16,000 p6 messages e s p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p2 messages e r p3 p2 ARE_YOU_ALIVE null
-16,000 p2 messages e s p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p1 messages e r p3 p1 ARE_YOU_ALIVE null
-16,000 p1 messages e s p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p7 messages e r p3 p7 ARE_YOU_ALIVE null
-16,000 p7 messages e s p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p5 messages e r p4 p5 ARE_YOU_ALIVE null
-16,000 p5 messages e s p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p6 messages e r p4 p6 ARE_YOU_ALIVE null
-16,000 p6 messages e s p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p0 messages e r p4 p0 ARE_YOU_ALIVE null
-16,000 p0 messages e s p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p4 messages e r p5 p4 ARE_YOU_ALIVE null
-16,000 p4 messages e s p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p7 messages e r p5 p7 ARE_YOU_ALIVE null
-16,000 p7 messages e s p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p1 messages e r p5 p1 ARE_YOU_ALIVE null
-16,000 p1 messages e s p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p7 messages e r p6 p7 ARE_YOU_ALIVE null
-16,000 p7 messages e s p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p4 messages e r p6 p4 ARE_YOU_ALIVE null
-16,000 p4 messages e s p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p2 messages e r p6 p2 ARE_YOU_ALIVE null
-16,000 p2 messages e s p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p6 messages e r p7 p6 ARE_YOU_ALIVE null
-16,000 p6 messages e s p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p5 messages e r p7 p5 ARE_YOU_ALIVE null
-16,000 p5 messages e s p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-16,000 p3 messages e r p7 p3 ARE_YOU_ALIVE null
-16,000 p3 messages e s p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p0 messages e r p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p0 messages e r p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p0 messages e r p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p1 messages e r p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p1 messages e r p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p1 messages e r p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p2 messages e r p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p2 messages e r p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p2 messages e r p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p3 messages e r p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p3 messages e r p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p3 messages e r p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p4 messages e r p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p4 messages e r p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p4 messages e r p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p5 messages e r p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p5 messages e r p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p5 messages e r p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p6 messages e r p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p6 messages e r p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p6 messages e r p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p7 messages e r p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p7 messages e r p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-17,000 p7 messages e r p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-18,000 p0 messages e s p0 p1 ARE_YOU_ALIVE null
-18,000 p0 messages e s p0 p2 ARE_YOU_ALIVE null
-18,000 p0 messages e s p0 p4 ARE_YOU_ALIVE null
-18,000 p1 messages e s p1 p0 ARE_YOU_ALIVE null
-18,000 p1 messages e s p1 p3 ARE_YOU_ALIVE null
-18,000 p1 messages e s p1 p5 ARE_YOU_ALIVE null
-18,000 p2 messages e s p2 p3 ARE_YOU_ALIVE null
-18,000 p2 messages e s p2 p0 ARE_YOU_ALIVE null
-18,000 p2 messages e s p2 p6 ARE_YOU_ALIVE null
-18,000 p3 messages e s p3 p2 ARE_YOU_ALIVE null
-18,000 p3 messages e s p3 p1 ARE_YOU_ALIVE null
-18,000 p3 messages e s p3 p7 ARE_YOU_ALIVE null
-18,000 p4 messages e s p4 p5 ARE_YOU_ALIVE null
-18,000 p4 messages e s p4 p6 ARE_YOU_ALIVE null
-18,000 p4 messages e s p4 p0 ARE_YOU_ALIVE null
-18,000 p5 messages e s p5 p4 ARE_YOU_ALIVE null
-18,000 p5 messages e s p5 p7 ARE_YOU_ALIVE null
-18,000 p5 messages e s p5 p1 ARE_YOU_ALIVE null
-18,000 p6 messages e s p6 p7 ARE_YOU_ALIVE null
-18,000 p6 messages e s p6 p4 ARE_YOU_ALIVE null
-18,000 p6 messages e s p6 p2 ARE_YOU_ALIVE null
-18,000 p7 messages e s p7 p6 ARE_YOU_ALIVE null
-18,000 p7 messages e s p7 p5 ARE_YOU_ALIVE null
-18,000 p7 messages e s p7 p3 ARE_YOU_ALIVE null
-19,000 p1 messages e r p0 p1 ARE_YOU_ALIVE null
-19,000 p1 messages e s p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p2 messages e r p0 p2 ARE_YOU_ALIVE null
-19,000 p2 messages e s p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p4 messages e r p0 p4 ARE_YOU_ALIVE null
-19,000 p4 messages e s p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p0 messages e r p1 p0 ARE_YOU_ALIVE null
-19,000 p0 messages e s p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p3 messages e r p1 p3 ARE_YOU_ALIVE null
-19,000 p3 messages e s p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p5 messages e r p1 p5 ARE_YOU_ALIVE null
-19,000 p5 messages e s p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p3 messages e r p2 p3 ARE_YOU_ALIVE null
-19,000 p3 messages e s p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p0 messages e r p2 p0 ARE_YOU_ALIVE null
-19,000 p0 messages e s p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p6 messages e r p2 p6 ARE_YOU_ALIVE null
-19,000 p6 messages e s p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p2 messages e r p3 p2 ARE_YOU_ALIVE null
-19,000 p2 messages e s p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p1 messages e r p3 p1 ARE_YOU_ALIVE null
-19,000 p1 messages e s p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p7 messages e r p3 p7 ARE_YOU_ALIVE null
-19,000 p7 messages e s p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p5 messages e r p4 p5 ARE_YOU_ALIVE null
-19,000 p5 messages e s p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p6 messages e r p4 p6 ARE_YOU_ALIVE null
-19,000 p6 messages e s p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p0 messages e r p4 p0 ARE_YOU_ALIVE null
-19,000 p0 messages e s p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p4 messages e r p5 p4 ARE_YOU_ALIVE null
-19,000 p4 messages e s p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p7 messages e r p5 p7 ARE_YOU_ALIVE null
-19,000 p7 messages e s p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p1 messages e r p5 p1 ARE_YOU_ALIVE null
-19,000 p1 messages e s p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p7 messages e r p6 p7 ARE_YOU_ALIVE null
-19,000 p7 messages e s p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p4 messages e r p6 p4 ARE_YOU_ALIVE null
-19,000 p4 messages e s p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p2 messages e r p6 p2 ARE_YOU_ALIVE null
-19,000 p2 messages e s p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p6 messages e r p7 p6 ARE_YOU_ALIVE null
-19,000 p6 messages e s p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p5 messages e r p7 p5 ARE_YOU_ALIVE null
-19,000 p5 messages e s p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-19,000 p3 messages e r p7 p3 ARE_YOU_ALIVE null
-19,000 p3 messages e s p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p0 messages e r p1 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p0 messages e r p2 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p0 messages e r p4 p0 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p1 messages e r p0 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p1 messages e r p3 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p1 messages e r p5 p1 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p2 messages e r p3 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p2 messages e r p0 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p2 messages e r p6 p2 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p3 messages e r p2 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p3 messages e r p1 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p3 messages e r p7 p3 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p4 messages e r p5 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p4 messages e r p6 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p4 messages e r p0 p4 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p5 messages e r p4 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p5 messages e r p7 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p5 messages e r p1 p5 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p6 messages e r p7 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p6 messages e r p4 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p6 messages e r p2 p6 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p7 messages e r p6 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p7 messages e r p5 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
-20,000 p7 messages e r p3 p7 I_AM_ALIVE [0,0,0,0,0,0,0,0]
+0,000 p0 messages e s p0 p1 TREE {[0{v={(0,45),ts=0},ts=0}],{(0,45),ts=0}}
+0,000 p0 messages e s p0 p2 TREE {[0{v={(0,45),ts=0},ts=0}],{(0,45),ts=0}}
+0,000 p0 messages e s p0 p4 TREE {[0{v={(0,45),ts=0},ts=0}],{(0,45),ts=0}}
+0,000 p1 messages e s p1 p0 TREE {[1{v={(1,46),ts=0},ts=0}],{(1,46),ts=0}}
+0,000 p1 messages e s p1 p3 TREE {[1{v={(1,46),ts=0},ts=0}],{(1,46),ts=0}}
+0,000 p1 messages e s p1 p5 TREE {[1{v={(1,46),ts=0},ts=0}],{(1,46),ts=0}}
+0,000 p2 messages e s p2 p3 TREE {[2{v={(2,47),ts=0},ts=0}],{(2,47),ts=0}}
+0,000 p2 messages e s p2 p0 TREE {[2{v={(2,47),ts=0},ts=0}],{(2,47),ts=0}}
+0,000 p2 messages e s p2 p6 TREE {[2{v={(2,47),ts=0},ts=0}],{(2,47),ts=0}}
+0,000 p3 messages e s p3 p2 TREE {[3{v={(3,48),ts=0},ts=0}],{(3,48),ts=0}}
+0,000 p3 messages e s p3 p1 TREE {[3{v={(3,48),ts=0},ts=0}],{(3,48),ts=0}}
+0,000 p3 messages e s p3 p7 TREE {[3{v={(3,48),ts=0},ts=0}],{(3,48),ts=0}}
+1,000 p1 messages e r p0 p1 TREE {[0{v={(0,45),ts=0},ts=0}],{(0,45),ts=0}}
+1,000 p1 messages e s p1 p0 ACK {[1{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+1,000 p1 messages e s p1 p3 ACK {[1{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+1,000 p1 messages e s p1 p5 ACK {[1{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+1,000 p2 messages e r p0 p2 TREE {[0{v={(0,45),ts=0},ts=0}],{(0,45),ts=0}}
+1,000 p2 messages e s p2 p0 ACK {[2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+1,000 p2 messages e s p2 p6 ACK {[2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+1,000 p2 messages e s p2 p3 FWD {[0{v={(0,45),ts=0},ts=0}, 2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+1,000 p4 messages e r p0 p4 TREE {[0{v={(0,45),ts=0},ts=0}],{(0,45),ts=0}}
+1,000 p4 messages e s p4 p0 ACK {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+1,000 p4 messages e s p4 p5 FWD {[0{v={(0,45),ts=0},ts=0}, 4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+1,000 p4 messages e s p4 p6 FWD {[0{v={(0,45),ts=0},ts=0}, 4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+1,000 p0 messages e r p1 p0 TREE {[1{v={(1,46),ts=0},ts=0}],{(1,46),ts=0}}
+1,000 p0 messages e s p0 p1 ACK {[0{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+1,000 p0 messages e s p0 p2 ACK {[0{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+1,000 p0 messages e s p0 p4 ACK {[0{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+1,000 p3 messages e r p1 p3 TREE {[1{v={(1,46),ts=0},ts=0}],{(1,46),ts=0}}
+1,000 p3 messages e s p3 p1 ACK {[3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+1,000 p3 messages e s p3 p7 ACK {[3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+1,000 p3 messages e s p3 p2 FWD {[1{v={(1,46),ts=0},ts=0}, 3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+1,000 p5 messages e r p1 p5 TREE {[1{v={(1,46),ts=0},ts=0}],{(1,46),ts=0}}
+1,000 p5 messages e s p5 p1 ACK {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+1,000 p5 messages e s p5 p4 FWD {[1{v={(1,46),ts=0},ts=0}, 5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+1,000 p5 messages e s p5 p7 FWD {[1{v={(1,46),ts=0},ts=0}, 5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+1,000 p3 messages e r p2 p3 TREE {[2{v={(2,47),ts=0},ts=0}],{(2,47),ts=0}}
+1,000 p3 messages e s p3 p2 ACK {[3{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+1,000 p3 messages e s p3 p1 ACK {[3{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+1,000 p3 messages e s p3 p7 ACK {[3{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+1,000 p0 messages e r p2 p0 TREE {[2{v={(2,47),ts=0},ts=0}],{(2,47),ts=0}}
+1,000 p0 messages e s p0 p2 ACK {[0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+1,000 p0 messages e s p0 p4 ACK {[0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+1,000 p0 messages e s p0 p1 FWD {[2{v={(2,47),ts=0},ts=0}, 0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+1,000 p6 messages e r p2 p6 TREE {[2{v={(2,47),ts=0},ts=0}],{(2,47),ts=0}}
+1,000 p6 messages e s p6 p2 ACK {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+1,000 p6 messages e s p6 p7 FWD {[2{v={(2,47),ts=0},ts=0}, 6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+1,000 p6 messages e s p6 p4 FWD {[2{v={(2,47),ts=0},ts=0}, 6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+1,000 p2 messages e r p3 p2 TREE {[3{v={(3,48),ts=0},ts=0}],{(3,48),ts=0}}
+1,000 p2 messages e s p2 p3 ACK {[2{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+1,000 p2 messages e s p2 p0 ACK {[2{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+1,000 p2 messages e s p2 p6 ACK {[2{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+1,000 p1 messages e r p3 p1 TREE {[3{v={(3,48),ts=0},ts=0}],{(3,48),ts=0}}
+1,000 p1 messages e s p1 p3 ACK {[1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+1,000 p1 messages e s p1 p5 ACK {[1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+1,000 p1 messages e s p1 p0 FWD {[3{v={(3,48),ts=0},ts=0}, 1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+1,000 p7 messages e r p3 p7 TREE {[3{v={(3,48),ts=0},ts=0}],{(3,48),ts=0}}
+1,000 p7 messages e s p7 p3 ACK {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+1,000 p7 messages e s p7 p6 FWD {[3{v={(3,48),ts=0},ts=0}, 7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+1,000 p7 messages e s p7 p5 FWD {[3{v={(3,48),ts=0},ts=0}, 7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+2,000 p0 messages e r p1 p0 ACK {[1{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p3 messages e r p1 p3 ACK {[1{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p3 messages e s p3 p1 ACK {[3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+2,000 p3 messages e s p3 p7 ACK {[3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+2,000 p3 messages e s p3 p2 FWD {[1{v={(0,45),ts=0},ts=2}, 3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+2,000 p5 messages e r p1 p5 ACK {[1{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p5 messages e s p5 p1 ACK {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p5 messages e s p5 p4 FWD {[1{v={(0,45),ts=0},ts=2}, 5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p5 messages e s p5 p7 FWD {[1{v={(0,45),ts=0},ts=2}, 5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p0 messages e r p2 p0 ACK {[2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p0 messages e s p0 p1 FWD {[2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p6 messages e r p2 p6 ACK {[2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p6 messages e s p6 p2 ACK {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p6 messages e s p6 p7 FWD {[2{v={(0,45),ts=0},ts=2}, 6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p6 messages e s p6 p4 FWD {[2{v={(0,45),ts=0},ts=2}, 6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p3 messages e r p2 p3 FWD {[0{v={(0,45),ts=0},ts=0}, 2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+2,000 p0 messages e r p4 p0 ACK {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+2,000 p0 messages e s p0 p1 FWD {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+2,000 p0 messages e s p0 p2 FWD {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+2,000 p5 messages e r p4 p5 FWD {[0{v={(0,45),ts=0},ts=0}, 4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+2,000 p6 messages e r p4 p6 FWD {[0{v={(0,45),ts=0},ts=0}, 4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+2,000 p6 messages e s p6 p7 FWD {[0{v={(0,45),ts=0},ts=0}, 4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+2,000 p1 messages e r p0 p1 ACK {[0{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p2 messages e r p0 p2 ACK {[0{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p2 messages e s p2 p0 ACK {[2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+2,000 p2 messages e s p2 p6 ACK {[2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+2,000 p2 messages e s p2 p3 FWD {[0{v={(1,46),ts=0},ts=2}, 2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+2,000 p4 messages e r p0 p4 ACK {[0{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p4 messages e s p4 p0 ACK {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p4 messages e s p4 p5 FWD {[0{v={(1,46),ts=0},ts=2}, 4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p4 messages e s p4 p6 FWD {[0{v={(1,46),ts=0},ts=2}, 4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p1 messages e r p3 p1 ACK {[3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p1 messages e s p1 p0 FWD {[3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p7 messages e r p3 p7 ACK {[3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p7 messages e s p7 p3 ACK {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p7 messages e s p7 p6 FWD {[3{v={(1,46),ts=0},ts=2}, 7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p7 messages e s p7 p5 FWD {[3{v={(1,46),ts=0},ts=2}, 7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p2 messages e r p3 p2 FWD {[1{v={(1,46),ts=0},ts=0}, 3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+2,000 p1 messages e r p5 p1 ACK {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+2,000 p1 messages e s p1 p0 FWD {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+2,000 p1 messages e s p1 p3 FWD {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+2,000 p4 messages e r p5 p4 FWD {[1{v={(1,46),ts=0},ts=0}, 5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+2,000 p7 messages e r p5 p7 FWD {[1{v={(1,46),ts=0},ts=0}, 5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+2,000 p7 messages e s p7 p6 FWD {[1{v={(1,46),ts=0},ts=0}, 5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+2,000 p2 messages e r p3 p2 ACK {[3{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+2,000 p1 messages e r p3 p1 ACK {[3{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+2,000 p1 messages e s p1 p3 ACK {[1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+2,000 p1 messages e s p1 p5 ACK {[1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+2,000 p1 messages e s p1 p0 FWD {[3{v={(2,47),ts=0},ts=3}, 1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+2,000 p7 messages e r p3 p7 ACK {[3{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+2,000 p7 messages e s p7 p3 ACK {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+2,000 p7 messages e s p7 p6 FWD {[3{v={(2,47),ts=0},ts=3}, 7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+2,000 p7 messages e s p7 p5 FWD {[3{v={(2,47),ts=0},ts=3}, 7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+2,000 p2 messages e r p0 p2 ACK {[0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+2,000 p2 messages e s p2 p3 FWD {[0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+2,000 p4 messages e r p0 p4 ACK {[0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+2,000 p4 messages e s p4 p0 ACK {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+2,000 p4 messages e s p4 p5 FWD {[0{v={(2,47),ts=0},ts=3}, 4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+2,000 p4 messages e s p4 p6 FWD {[0{v={(2,47),ts=0},ts=3}, 4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+2,000 p1 messages e r p0 p1 FWD {[2{v={(2,47),ts=0},ts=0}, 0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+2,000 p2 messages e r p6 p2 ACK {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+2,000 p2 messages e s p2 p3 FWD {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+2,000 p2 messages e s p2 p0 FWD {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+2,000 p7 messages e r p6 p7 FWD {[2{v={(2,47),ts=0},ts=0}, 6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+2,000 p4 messages e r p6 p4 FWD {[2{v={(2,47),ts=0},ts=0}, 6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+2,000 p4 messages e s p4 p5 FWD {[2{v={(2,47),ts=0},ts=0}, 6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+2,000 p3 messages e r p2 p3 ACK {[2{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+2,000 p0 messages e r p2 p0 ACK {[2{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+2,000 p0 messages e s p0 p2 ACK {[0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+2,000 p0 messages e s p0 p4 ACK {[0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+2,000 p0 messages e s p0 p1 FWD {[2{v={(3,48),ts=0},ts=3}, 0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+2,000 p6 messages e r p2 p6 ACK {[2{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+2,000 p6 messages e s p6 p2 ACK {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+2,000 p6 messages e s p6 p7 FWD {[2{v={(3,48),ts=0},ts=3}, 6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+2,000 p6 messages e s p6 p4 FWD {[2{v={(3,48),ts=0},ts=3}, 6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+2,000 p3 messages e r p1 p3 ACK {[1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+2,000 p3 messages e s p3 p2 FWD {[1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+2,000 p5 messages e r p1 p5 ACK {[1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+2,000 p5 messages e s p5 p1 ACK {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+2,000 p5 messages e s p5 p4 FWD {[1{v={(3,48),ts=0},ts=3}, 5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+2,000 p5 messages e s p5 p7 FWD {[1{v={(3,48),ts=0},ts=3}, 5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+2,000 p0 messages e r p1 p0 FWD {[3{v={(3,48),ts=0},ts=0}, 1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+2,000 p3 messages e r p7 p3 ACK {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+2,000 p3 messages e s p3 p2 FWD {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+2,000 p3 messages e s p3 p1 FWD {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+2,000 p6 messages e r p7 p6 FWD {[3{v={(3,48),ts=0},ts=0}, 7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+2,000 p5 messages e r p7 p5 FWD {[3{v={(3,48),ts=0},ts=0}, 7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+2,000 p5 messages e s p5 p4 FWD {[3{v={(3,48),ts=0},ts=0}, 7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+3,000 p1 messages e r p3 p1 ACK {[3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+3,000 p1 messages e s p1 p0 FWD {[3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+3,000 p7 messages e r p3 p7 ACK {[3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+3,000 p7 messages e s p7 p3 ACK {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+3,000 p7 messages e s p7 p6 FWD {[3{v={(0,45),ts=0},ts=4}, 7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+3,000 p7 messages e s p7 p5 FWD {[3{v={(0,45),ts=0},ts=4}, 7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+3,000 p2 messages e r p3 p2 FWD {[1{v={(0,45),ts=0},ts=2}, 3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+3,000 p1 messages e r p5 p1 ACK {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p1 messages e s p1 p0 FWD {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p1 messages e s p1 p3 FWD {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p4 messages e r p5 p4 FWD {[1{v={(0,45),ts=0},ts=2}, 5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p7 messages e r p5 p7 FWD {[1{v={(0,45),ts=0},ts=2}, 5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p7 messages e s p7 p6 FWD {[1{v={(0,45),ts=0},ts=2}, 5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p1 messages e r p0 p1 FWD {[2{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p2 messages e r p6 p2 ACK {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p2 messages e s p2 p3 FWD {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p2 messages e s p2 p0 FWD {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p7 messages e r p6 p7 FWD {[2{v={(0,45),ts=0},ts=2}, 6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p4 messages e r p6 p4 FWD {[2{v={(0,45),ts=0},ts=2}, 6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p4 messages e s p4 p5 FWD {[2{v={(0,45),ts=0},ts=2}, 6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+3,000 p1 messages e r p0 p1 FWD {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+3,000 p2 messages e r p0 p2 FWD {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+3,000 p2 messages e s p2 p3 FWD {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+3,000 p7 messages e r p6 p7 FWD {[0{v={(0,45),ts=0},ts=0}, 4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+3,000 p0 messages e r p2 p0 ACK {[2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+3,000 p0 messages e s p0 p1 FWD {[2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+3,000 p6 messages e r p2 p6 ACK {[2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+3,000 p6 messages e s p6 p2 ACK {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+3,000 p6 messages e s p6 p7 FWD {[2{v={(1,46),ts=0},ts=4}, 6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+3,000 p6 messages e s p6 p4 FWD {[2{v={(1,46),ts=0},ts=4}, 6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+3,000 p3 messages e r p2 p3 FWD {[0{v={(1,46),ts=0},ts=2}, 2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+3,000 p0 messages e r p4 p0 ACK {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p0 messages e s p0 p1 FWD {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p0 messages e s p0 p2 FWD {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p5 messages e r p4 p5 FWD {[0{v={(1,46),ts=0},ts=2}, 4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p6 messages e r p4 p6 FWD {[0{v={(1,46),ts=0},ts=2}, 4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p6 messages e s p6 p7 FWD {[0{v={(1,46),ts=0},ts=2}, 4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p0 messages e r p1 p0 FWD {[3{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p3 messages e r p7 p3 ACK {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p3 messages e s p3 p2 FWD {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p3 messages e s p3 p1 FWD {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p6 messages e r p7 p6 FWD {[3{v={(1,46),ts=0},ts=2}, 7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p5 messages e r p7 p5 FWD {[3{v={(1,46),ts=0},ts=2}, 7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p5 messages e s p5 p4 FWD {[3{v={(1,46),ts=0},ts=2}, 7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+3,000 p0 messages e r p1 p0 FWD {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+3,000 p3 messages e r p1 p3 FWD {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+3,000 p3 messages e s p3 p2 FWD {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+3,000 p6 messages e r p7 p6 FWD {[1{v={(1,46),ts=0},ts=0}, 5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+3,000 p3 messages e r p1 p3 ACK {[1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+3,000 p3 messages e s p3 p2 FWD {[1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+3,000 p5 messages e r p1 p5 ACK {[1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+3,000 p5 messages e s p5 p1 ACK {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+3,000 p5 messages e s p5 p4 FWD {[1{v={(2,47),ts=0},ts=7}, 5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+3,000 p5 messages e s p5 p7 FWD {[1{v={(2,47),ts=0},ts=7}, 5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+3,000 p0 messages e r p1 p0 FWD {[3{v={(2,47),ts=0},ts=3}, 1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+3,000 p3 messages e r p7 p3 ACK {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p3 messages e s p3 p2 FWD {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p3 messages e s p3 p1 FWD {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p6 messages e r p7 p6 FWD {[3{v={(2,47),ts=0},ts=3}, 7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p5 messages e r p7 p5 FWD {[3{v={(2,47),ts=0},ts=3}, 7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p5 messages e s p5 p4 FWD {[3{v={(2,47),ts=0},ts=3}, 7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p3 messages e r p2 p3 FWD {[0{v={(2,47),ts=0},ts=3}],{(2,47),ts=0}}
+3,000 p0 messages e r p4 p0 ACK {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p0 messages e s p0 p1 FWD {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p0 messages e s p0 p2 FWD {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p5 messages e r p4 p5 FWD {[0{v={(2,47),ts=0},ts=3}, 4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p6 messages e r p4 p6 FWD {[0{v={(2,47),ts=0},ts=3}, 4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p6 messages e s p6 p7 FWD {[0{v={(2,47),ts=0},ts=3}, 4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+3,000 p3 messages e r p2 p3 FWD {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+3,000 p0 messages e r p2 p0 FWD {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+3,000 p0 messages e s p0 p1 FWD {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+3,000 p5 messages e r p4 p5 FWD {[2{v={(2,47),ts=0},ts=0}, 6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+3,000 p2 messages e r p0 p2 ACK {[0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+3,000 p2 messages e s p2 p3 FWD {[0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+3,000 p4 messages e r p0 p4 ACK {[0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+3,000 p4 messages e s p4 p0 ACK {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+3,000 p4 messages e s p4 p5 FWD {[0{v={(3,48),ts=0},ts=7}, 4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+3,000 p4 messages e s p4 p6 FWD {[0{v={(3,48),ts=0},ts=7}, 4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+3,000 p1 messages e r p0 p1 FWD {[2{v={(3,48),ts=0},ts=3}, 0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+3,000 p2 messages e r p6 p2 ACK {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p2 messages e s p2 p3 FWD {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p2 messages e s p2 p0 FWD {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p7 messages e r p6 p7 FWD {[2{v={(3,48),ts=0},ts=3}, 6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p4 messages e r p6 p4 FWD {[2{v={(3,48),ts=0},ts=3}, 6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p4 messages e s p4 p5 FWD {[2{v={(3,48),ts=0},ts=3}, 6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p2 messages e r p3 p2 FWD {[1{v={(3,48),ts=0},ts=3}],{(3,48),ts=0}}
+3,000 p1 messages e r p5 p1 ACK {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p1 messages e s p1 p0 FWD {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p1 messages e s p1 p3 FWD {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p4 messages e r p5 p4 FWD {[1{v={(3,48),ts=0},ts=3}, 5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p7 messages e r p5 p7 FWD {[1{v={(3,48),ts=0},ts=3}, 5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p7 messages e s p7 p6 FWD {[1{v={(3,48),ts=0},ts=3}, 5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+3,000 p2 messages e r p3 p2 FWD {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+3,000 p1 messages e r p3 p1 FWD {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+3,000 p1 messages e s p1 p0 FWD {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+3,000 p4 messages e r p5 p4 FWD {[3{v={(3,48),ts=0},ts=0}, 7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+4,000 p0 messages e r p1 p0 FWD {[3{v={(0,45),ts=0},ts=4}],{(0,45),ts=0}}
+4,000 p3 messages e r p7 p3 ACK {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+4,000 p3 messages e s p3 p2 FWD {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+4,000 p3 messages e s p3 p1 FWD {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+4,000 p6 messages e r p7 p6 FWD {[3{v={(0,45),ts=0},ts=4}, 7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+4,000 p5 messages e r p7 p5 FWD {[3{v={(0,45),ts=0},ts=4}, 7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+4,000 p5 messages e s p5 p4 FWD {[3{v={(0,45),ts=0},ts=4}, 7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+4,000 p0 messages e r p1 p0 FWD {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p3 messages e r p1 p3 FWD {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p3 messages e s p3 p2 FWD {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p6 messages e r p7 p6 FWD {[1{v={(0,45),ts=0},ts=2}, 5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p3 messages e r p2 p3 FWD {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p0 messages e r p2 p0 FWD {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p0 messages e s p0 p1 FWD {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p5 messages e r p4 p5 FWD {[2{v={(0,45),ts=0},ts=2}, 6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+4,000 p3 messages e r p2 p3 FWD {[4{v={(0,45),ts=0},ts=1}],{(0,45),ts=0}}
+4,000 p1 messages e r p0 p1 FWD {[2{v={(1,46),ts=0},ts=4}],{(1,46),ts=0}}
+4,000 p2 messages e r p6 p2 ACK {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+4,000 p2 messages e s p2 p3 FWD {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+4,000 p2 messages e s p2 p0 FWD {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+4,000 p7 messages e r p6 p7 FWD {[2{v={(1,46),ts=0},ts=4}, 6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+4,000 p4 messages e r p6 p4 FWD {[2{v={(1,46),ts=0},ts=4}, 6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+4,000 p4 messages e s p4 p5 FWD {[2{v={(1,46),ts=0},ts=4}, 6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+4,000 p1 messages e r p0 p1 FWD {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p2 messages e r p0 p2 FWD {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p2 messages e s p2 p3 FWD {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p7 messages e r p6 p7 FWD {[0{v={(1,46),ts=0},ts=2}, 4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p2 messages e r p3 p2 FWD {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p1 messages e r p3 p1 FWD {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p1 messages e s p1 p0 FWD {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p4 messages e r p5 p4 FWD {[3{v={(1,46),ts=0},ts=2}, 7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+4,000 p2 messages e r p3 p2 FWD {[5{v={(1,46),ts=0},ts=1}],{(1,46),ts=0}}
+4,000 p2 messages e r p3 p2 FWD {[1{v={(2,47),ts=0},ts=7}],{(2,47),ts=0}}
+4,000 p1 messages e r p5 p1 ACK {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+4,000 p1 messages e s p1 p0 FWD {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+4,000 p1 messages e s p1 p3 FWD {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+4,000 p4 messages e r p5 p4 FWD {[1{v={(2,47),ts=0},ts=7}, 5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+4,000 p7 messages e r p5 p7 FWD {[1{v={(2,47),ts=0},ts=7}, 5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+4,000 p7 messages e s p7 p6 FWD {[1{v={(2,47),ts=0},ts=7}, 5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+4,000 p2 messages e r p3 p2 FWD {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p1 messages e r p3 p1 FWD {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p1 messages e s p1 p0 FWD {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p4 messages e r p5 p4 FWD {[3{v={(2,47),ts=0},ts=3}, 7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p1 messages e r p0 p1 FWD {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p2 messages e r p0 p2 FWD {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p2 messages e s p2 p3 FWD {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p7 messages e r p6 p7 FWD {[0{v={(2,47),ts=0},ts=3}, 4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+4,000 p1 messages e r p0 p1 FWD {[6{v={(2,47),ts=0},ts=1}],{(2,47),ts=0}}
+4,000 p3 messages e r p2 p3 FWD {[0{v={(3,48),ts=0},ts=7}],{(3,48),ts=0}}
+4,000 p0 messages e r p4 p0 ACK {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+4,000 p0 messages e s p0 p1 FWD {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+4,000 p0 messages e s p0 p2 FWD {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+4,000 p5 messages e r p4 p5 FWD {[0{v={(3,48),ts=0},ts=7}, 4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+4,000 p6 messages e r p4 p6 FWD {[0{v={(3,48),ts=0},ts=7}, 4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+4,000 p6 messages e s p6 p7 FWD {[0{v={(3,48),ts=0},ts=7}, 4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+4,000 p3 messages e r p2 p3 FWD {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p0 messages e r p2 p0 FWD {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p0 messages e s p0 p1 FWD {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p5 messages e r p4 p5 FWD {[2{v={(3,48),ts=0},ts=3}, 6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p0 messages e r p1 p0 FWD {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p3 messages e r p1 p3 FWD {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p3 messages e s p3 p2 FWD {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p6 messages e r p7 p6 FWD {[1{v={(3,48),ts=0},ts=3}, 5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+4,000 p0 messages e r p1 p0 FWD {[7{v={(3,48),ts=0},ts=1}],{(3,48),ts=0}}
+5,000 p2 messages e r p3 p2 FWD {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+5,000 p1 messages e r p3 p1 FWD {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+5,000 p1 messages e s p1 p0 FWD {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+5,000 p4 messages e r p5 p4 FWD {[3{v={(0,45),ts=0},ts=4}, 7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+5,000 p2 messages e r p3 p2 FWD {[5{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+5,000 p1 messages e r p0 p1 FWD {[6{v={(0,45),ts=0},ts=2}],{(0,45),ts=0}}
+5,000 p3 messages e r p2 p3 FWD {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+5,000 p0 messages e r p2 p0 FWD {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+5,000 p0 messages e s p0 p1 FWD {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+5,000 p5 messages e r p4 p5 FWD {[2{v={(1,46),ts=0},ts=4}, 6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+5,000 p3 messages e r p2 p3 FWD {[4{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+5,000 p0 messages e r p1 p0 FWD {[7{v={(1,46),ts=0},ts=2}],{(1,46),ts=0}}
+5,000 p0 messages e r p1 p0 FWD {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+5,000 p3 messages e r p1 p3 FWD {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+5,000 p3 messages e s p3 p2 FWD {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+5,000 p6 messages e r p7 p6 FWD {[1{v={(2,47),ts=0},ts=7}, 5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+5,000 p0 messages e r p1 p0 FWD {[7{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+5,000 p3 messages e r p2 p3 FWD {[4{v={(2,47),ts=0},ts=4}],{(2,47),ts=0}}
+5,000 p1 messages e r p0 p1 FWD {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+5,000 p2 messages e r p0 p2 FWD {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+5,000 p2 messages e s p2 p3 FWD {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+5,000 p7 messages e r p6 p7 FWD {[0{v={(3,48),ts=0},ts=7}, 4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}
+5,000 p1 messages e r p0 p1 FWD {[6{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+5,000 p2 messages e r p3 p2 FWD {[5{v={(3,48),ts=0},ts=4}],{(3,48),ts=0}}
+6,000 p0 messages e r p1 p0 FWD {[7{v={(0,45),ts=0},ts=6}],{(0,45),ts=0}}
+6,000 p1 messages e r p0 p1 FWD {[6{v={(1,46),ts=0},ts=6}],{(1,46),ts=0}}
+6,000 p2 messages e r p3 p2 FWD {[5{v={(2,47),ts=0},ts=8}],{(2,47),ts=0}}
+6,000 p3 messages e r p2 p3 FWD {[4{v={(3,48),ts=0},ts=8}],{(3,48),ts=0}}

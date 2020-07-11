@@ -256,7 +256,7 @@ public class NewHiADSD  extends CrashProtocol {
             }
 
             // Exibe timestamps resultantes
-            //logger.info(String.format("P%s: No tempo %s, ts = %s", me,process.clock(),Arrays.toString(ts)));
+            logger.info(String.format("P%s: No tempo %s, ts = %s", me,process.clock(),Arrays.toString(ts)));
 
             try {
                 sleep(INTERVAL);
