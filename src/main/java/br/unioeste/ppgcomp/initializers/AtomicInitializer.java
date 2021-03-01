@@ -1,15 +1,16 @@
-package br.unioeste.ppgcomp.broadcast;
+package br.unioeste.ppgcomp.initializers;
 
+import br.unioeste.ppgcomp.broadcast.AtomicBroadcast;
 import br.unioeste.ppgcomp.fd.NewHiADSD;
 import lse.neko.NekoProcess;
 import lse.neko.NekoProcessInitializer;
 import lse.neko.SenderInterface;
 import org.apache.java.util.Configurations;
 
-public class TreeReliableInitializer implements NekoProcessInitializer {
+public class AtomicInitializer implements NekoProcessInitializer {
 
     public static final String PROTOCOL_NAME = "New-hiADSD";
-    public static final String PROTOCOL_APP = "Tree-Broadcast";
+    public static final String PROTOCOL_APP = "Atomic-Broadcast";
 
     public void init(NekoProcess process, Configurations config) throws Exception {
         // Tipo de rede definido nos arquivos de configuração
@@ -18,17 +19,17 @@ public class TreeReliableInitializer implements NekoProcessInitializer {
         fd.setId(PROTOCOL_NAME);
 
 
-        TreeReliableBroadcast tree = new TreeReliableBroadcast(process,sender,PROTOCOL_APP);
-        tree.setId(PROTOCOL_APP);
+        AtomicBroadcast atomic = new AtomicBroadcast(process,sender,PROTOCOL_APP);
+        atomic.setId(PROTOCOL_APP);
 
 
 
-        fd.addListener(tree);
+        fd.addListener(atomic);
 
 
         //Inicia execução
-        fd.launch();
-        tree.launch();
+        //fd.launch();
+        atomic.launch();
 
 
 

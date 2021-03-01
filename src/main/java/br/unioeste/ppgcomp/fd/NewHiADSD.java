@@ -2,6 +2,7 @@ package br.unioeste.ppgcomp.fd;
 
 
 import br.unioeste.ppgcomp.fault.CrashProtocol;
+import br.unioeste.ppgcomp.initializers.FailureDetectorInitializer;
 import lse.neko.*;
 import lse.neko.failureDetectors.FailureDetectorListener;
 
@@ -36,6 +37,11 @@ public class NewHiADSD  extends CrashProtocol {
 
     // Lista de Listeners do detector de falhas
     private List<FailureDetectorListener> listeners;
+
+    @Override
+    public void send(NekoMessage m) {
+
+    }
 
     enum STATE {
         FAULTY,
@@ -256,7 +262,7 @@ public class NewHiADSD  extends CrashProtocol {
             }
 
             // Exibe timestamps resultantes
-            logger.info(String.format("P%s: No tempo %s, ts = %s", me,process.clock(),Arrays.toString(ts)));
+            //logger.info(String.format("P%s: No tempo %s, ts = %s", me,process.clock(),Arrays.toString(ts)));
 
             try {
                 sleep(INTERVAL);

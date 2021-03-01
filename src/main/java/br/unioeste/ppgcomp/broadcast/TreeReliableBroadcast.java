@@ -1,18 +1,18 @@
 package br.unioeste.ppgcomp.broadcast;
 
+import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.data.AckData;
+import br.unioeste.ppgcomp.data.Data;
 import br.unioeste.ppgcomp.data.TreeData;
 import br.unioeste.ppgcomp.fault.CrashProtocol;
-import br.unioeste.ppgcomp.overlay.VCube;
+import br.unioeste.ppgcomp.topologia.VCube;
 import lse.neko.*;
 import lse.neko.failureDetectors.FailureDetectorListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class TreeReliableBroadcast extends CrashProtocol
-    implements FailureDetectorListener {
+public class TreeReliableBroadcast extends AbstractBroadcast {
 
     private TreeData last[];
     private NekoMessageQueue pending_acks;
@@ -182,7 +182,7 @@ public class TreeReliableBroadcast extends CrashProtocol
 
 
     @Override
-    public void deliver(NekoMessage m) {
+    public void deliverMessage(NekoMessage m) {
         if (isCrashed())
             return;
 
@@ -233,4 +233,6 @@ public class TreeReliableBroadcast extends CrashProtocol
             }
         }
     }
+
+
 }

@@ -43,9 +43,10 @@ public class AtomicDataMessage {
 
     @Override
     public String toString() {
-        return "{"
-                 + tsaggr +
-                "," + data +
-                '}';
+        return  "{" + source +
+                data +
+                '}' +
+                 " tsaggr ={"+ tsaggr +
+                "}," ;
     }
 }

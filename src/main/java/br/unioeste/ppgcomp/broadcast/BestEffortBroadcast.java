@@ -1,5 +1,6 @@
 package br.unioeste.ppgcomp.broadcast;
 
+import br.unioeste.ppgcomp.initializers.LazyReliableInitializer;
 import lse.neko.*;
 import lse.neko.util.logging.NekoLogger;
 
@@ -35,7 +36,7 @@ public class BestEffortBroadcast extends ActiveReceiver {
         // Envia mensagem à todos os processos
         for (int i = 0; i < process.getN(); i++) {
             int dest[] = {i};
-            sender.send(new NekoMessage(dest,LazyReliableInitializer.PROTOCOL_APP,m,MESSAGE_BROADCAST));
+            sender.send(new NekoMessage(dest, LazyReliableInitializer.PROTOCOL_APP,m,MESSAGE_BROADCAST));
         }
     }
 

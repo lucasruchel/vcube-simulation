@@ -11,14 +11,14 @@ import java.util.logging.Logger;
 public abstract class CrashProtocol extends ActiveReceiver
         implements CrashInterface,SenderInterface {
 
-    private Boolean crashed;
+    protected Boolean crashed;
 
     protected static Logger logger = NekoLogger.getLogger("messages");
     public static final String LOG_DROP = "d";
     public static final String LOG_CRASH = "crash";
     public static final String LOG_RECOVER = "recover";
 
-    private SenderInterface sender;
+    protected SenderInterface sender;
 
 
     public CrashProtocol(NekoProcess process, SenderInterface sender, String name) {
@@ -131,21 +131,6 @@ public abstract class CrashProtocol extends ActiveReceiver
                 RecoverTask task = new RecoverTask(this);
                 taskScheduler(task,endTimes[i]);
             }
-
-    }
-
-    public void send(NekoMessage m) {
-        if (!crashed) {
-            sender.send(m);
-        } else {// is crashed
-            if (logger.isLoggable(Level.FINE)) {
-                logger.log(Level.FINE,
-                        "",
-                        new Object[] {
-                                new NekoMessageEvent(LOG_DROP, m)
-                        });
-            }
-        }
 
     }
 

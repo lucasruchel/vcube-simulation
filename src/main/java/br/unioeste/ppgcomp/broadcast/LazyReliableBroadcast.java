@@ -1,5 +1,6 @@
 package br.unioeste.ppgcomp.broadcast;
 
+import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.fault.CrashProtocol;
 import lse.neko.NekoMessage;
 import lse.neko.NekoProcess;
@@ -11,8 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class LazyReliableBroadcast extends CrashProtocol
-        implements FailureDetectorListener {
+public class LazyReliableBroadcast extends AbstractBroadcast {
 
     // Lista de processos corretos
     private List<Integer> correct;
@@ -54,7 +54,7 @@ public class LazyReliableBroadcast extends CrashProtocol
 
 
     @Override
-    public void deliver(NekoMessage brcast) {
+    public void deliverMessage(NekoMessage brcast) {
         NekoMessage m = (NekoMessage) brcast.getContent();
 
         if (!delivered.contains(m)){

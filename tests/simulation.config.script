@@ -10,7 +10,7 @@ simulation = true
 #
 # The number of communicating processes.
 #
-process.num = 16
+process.num = 1024
 
 
 # process.0.crash.start = 1
@@ -60,9 +60,9 @@ simulation.time=100
 # Write the log to a file and to the console.
 handlers = java.util.logging.FileHandler,java.util.logging.ConsoleHandler
 # Sets the name of the log file.
-java.util.logging.FileHandler.pattern = atomic-16.mensagens-3.log
+java.util.logging.FileHandler.pattern = atomic-1024.mensagens-3.log
 # The messages channel logs all messages exchanged among processes
-# at the FINE level. 
+# at the FINE level.
 # The file handler logs them.
 # The console handler does not log them, as it only logs messages
 # at levels INFO or higher.

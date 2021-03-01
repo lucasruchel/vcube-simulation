@@ -2,3 +2,5 @@ New Hi-ADSD.iml
 target/classes target/generated-sources
 target/
 .idea/
+logs/
+

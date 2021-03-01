@@ -3,21 +3,13 @@ package br.unioeste.ppgcomp.data;
 public class Data {
     private int src;
     private Object data;
-    private int ts;
 
-    public Data(int src, Object data, int ts) {
+    public Data(int src, Object data) {
         this.src = src;
         this.data = data;
-        this.ts = ts;
     }
 
-    public int getTs() {
-        return ts;
-    }
 
-    public void setTs(int ts) {
-        this.ts = ts;
-    }
 
     public int getSrc() {
         return src;
@@ -40,7 +32,7 @@ public class Data {
         return "{" +
                 "(" + src +
                 "," + data +
-                "),ts=" + ts +
+                ")"+
                 "}";
 
     }

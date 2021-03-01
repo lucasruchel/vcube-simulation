@@ -1,16 +1,17 @@
 package br.unioeste.ppgcomp.broadcast;
 
+import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.data.AtomicDataMessage;
 import br.unioeste.ppgcomp.data.Data;
 import br.unioeste.ppgcomp.data.TSDataMessage;
-import br.unioeste.ppgcomp.data.TreeData;
-import br.unioeste.ppgcomp.fault.CrashProtocol;
-import br.unioeste.ppgcomp.overlay.VCube;
 import lse.neko.*;
+import lse.neko.util.TimerTask;
 
 import java.util.*;
 
-public class AtomicBroadcast extends CrashProtocol {
+public class AtomicBroadcast extends AbstractBroadcast {
+
+
 
     // Conjunto de mensagens marcadas
     private TreeSet<TSDataMessage> stamped;
@@ -18,26 +19,14 @@ public class AtomicBroadcast extends CrashProtocol {
     // Conjunto de mensagens recebidas
     private TreeSet<TSDataMessage> received;
 
-    // Conjunto de mensagens entregues
-    private TreeSet<TSDataMessage> delivered;
 
     // Conjunto de mensagens que são marcadas para entrega, mas que precisam de ordenação
-    private TreeSet<TSDataMessage> mdeliverable;
+    private TreeSet<TSDataMessage> delivered;
+
+
 
     // Marcador de tempo local
     private int lc;
-
-    // Identificador do process
-    private int me;
-
-    // Numero de processos
-    private int np;
-
-
-    private List<Integer> corretos;
-
-    // Overlay dos processos para encaminhamento em árvore
-    private VCube vcube;
 
     // IDs das mensagens utilizadas
     private static final int TREE = 1301;
@@ -53,31 +42,15 @@ public class AtomicBroadcast extends CrashProtocol {
     public AtomicBroadcast(NekoProcess process, SenderInterface sender, String name) {
         super(process, sender, name);
 
-        init();
-    }
-
-    private void init(){
-        np = process.getN();
-        me = process.getID();
-
-
         stamped = new TreeSet<>();
         received = new TreeSet<>();
         delivered = new TreeSet<>();
-        mdeliverable = new TreeSet<>();
 
         this.lc = 0;
 
-        corretos = new ArrayList<>();
-        for (int i = 0; i < np; i++) {
-            corretos.add(i);
-        }
-
-        vcube = new VCube(log2(np));
-        vcube.setCorrects(corretos);
     }
 
-    public void broadcast(Data m){
+       public void broadcast_tree(Data m){
         TreeSet<TSDataMessage> tsaggr = new TreeSet<>();
         TSDataMessage t = new TSDataMessage(me,m,lc);
         tsaggr.add(t);
@@ -94,11 +67,13 @@ public class AtomicBroadcast extends CrashProtocol {
         // Utiliza overlay do vcube para definir destinos em uma topologia de árvore
         List<Integer> destinos = vcube.subtree(me,from);
 
+        double delay = DELAY;
         for (int p : destinos){
             AtomicDataMessage treeMessage = new AtomicDataMessage(source,tsaggr,data);
 
             NekoMessage m = new NekoMessage(from,new int[]{p},getId(),treeMessage,type);
-            send(m);
+            NekoSystem.instance().getTimer().schedule(new SenderTask(m), delay);
+            delay += DELAY;
         }
     }
     public boolean contains(TreeSet<TSDataMessage> list,Data o){
@@ -110,26 +85,21 @@ public class AtomicBroadcast extends CrashProtocol {
     }
 
     @Override
-    public void deliver(NekoMessage m) {
+    public void deliverMessage(NekoMessage m) {
+        if (isCrashed())
+            return;
+
         //Dados da mensagem
         AtomicDataMessage data = (AtomicDataMessage) m.getContent();
-
 
         this.lc = Math.max(lc + 1,data.getMaxTimestamp());
         TreeSet<TSDataMessage> tsaggr = new TreeSet<>(data.getTsaggr());
 
-
         // subree src
-        List<Integer> subtree_src = vcube.subtree(me, data.getSource());
+        List<Integer> subtree_src = vcube.subtree(me, m.getSource());
 
-
-        //System.out.println(String.format("p%s: src=%s == me=%s", me,subtree_src.toString(),subtree_me.toString()));
-
-
-        if (!contains(received,data.getData())) {
+        if (!contains(received,data.getData()) && !contains(delivered,data.getData()) && !contains(stamped,data.getData()) ) {
             TSDataMessage ts = new TSDataMessage(me, data.getData(), lc);
-
-
             tsaggr.add(ts);
 
             for (int i : vcube.subtree(me,me)) {
@@ -138,26 +108,37 @@ public class AtomicBroadcast extends CrashProtocol {
                     tsi.add(ts);
 
                     AtomicDataMessage ack = new AtomicDataMessage(me, tsi, data.getData());
-
-
                     send(new NekoMessage(me, new int[]{i}, getId(), ack, ACK));
                 }
-
             }
         }
 
         forward(data.getSource(),m.getSource(),data.getData(),tsaggr,FWD);
 
-        received.addAll(tsaggr);
+        // Verifica se não possui mensagem com falha
+        Iterator<TSDataMessage> iterator = tsaggr.iterator();
+        while (iterator.hasNext()){
+            TSDataMessage d = iterator.next();
+
+            if (!vcube.getCorrects().contains(d.getP())){
+                System.out.println("Removendo mensagem");
+                iterator.remove();
+            }
+        }
+
+        if (!contains(delivered,data.getData()))
+            received.addAll(tsaggr);
 
 
 
+       // System.out.println(String.format("p%s: Received de %s processos, clock=%s", me,received.size(),process.clock()));
 
-        if (isReceivedFromAll(data.getData())){
+        if (isReceivedFromAll(data.getData()) && !contains(delivered,data.getData())){
             int sm = max(received,data.getData());
 
             doDeliver(data.getData(),sm);
         }
+
     }
 
     private void doDeliver(Data data,int sm){
@@ -174,45 +155,44 @@ public class AtomicBroadcast extends CrashProtocol {
         }
 
 
-        iterator = stamped.iterator();
-        while (iterator.hasNext()) {
-            boolean deliverable = true;
+//        Ordenar lista de mensagens marcadas.
 
-            TSDataMessage st = iterator.next();
+        ArrayList<TSDataMessage> deliverList = new ArrayList<>();
+        for (TSDataMessage m_ : stamped) {
+            boolean menor = true;
 
-            for (TSDataMessage t : received) {
-                if (t.getTs() >= st.getTs()) {
-                    deliverable = false;
-                    break;
+            for (TSDataMessage m__ : received) {
+                if (m_.getTs() > m__.getTs() || (m_.getTs() == m__.getTs() && m_.getData().getSrc() > m__.getData().getSrc())) {
+                    menor = false;
                 }
             }
 
-            if (deliverable){
-                mdeliverable.add(ts);
-                iterator.remove();
+            if (menor){
+                deliverList.add(m_);
 
-                System.out.println(String.format("p%s: Delivered mensagem de p%s com ts=%s", me,st.getP(),st.getTs()));
             }
         }
 
+       stamped.removeAll(deliverList);
 
+        deliverList.sort(new DeliverComparator());
+        for (TSDataMessage m_ : deliverList) {
+            delivered.add(m_);
 
-
-
-
+            if (DEBUG)
+                logger.info("delivered " + m_.toString());
+        }
     }
-
     private int max(Set<TSDataMessage> set,Data data){
         int max = 0;
 
         for (TSDataMessage t : set){
-            if (t.getData().equals(data) && t.getData().getTs() > max)
+            if (t.getData().equals(data) && t.getTs() > max)
                 max = t.getTs();
         }
 
         return max;
     }
-
     private boolean isReceivedFromAll(Object data){
         int counter = 0;
         for (TSDataMessage t : received){
@@ -220,24 +200,28 @@ public class AtomicBroadcast extends CrashProtocol {
                 counter++;
             }
         }
-
-
         // Se contador for menor significa que nem todos receberam a mensagem
-        return counter == np;
+        return counter >= vcube.getCorrects().size();
     }
-
-    private int log2(int v){
-        return (int) (Math.log(v)/Math.log(2));
-    }
-
     @Override
     public void run() {
-        if (me < 4){
-            String message = String.valueOf(45+me);
-            Data m = new Data(me,message,lc);
+//        if (me == 0){
+//            String message = "Dados"+me;
+//            Data m = new Data(me,message);
+//
+//            broadcast_tree(m);
+//        }
 
-            broadcast(m);
+        if (me < 3){
+            NekoSystem.instance().getTimer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    String message = "Dados"+me;
+                    Data m = new Data(me,message);
+
+                    broadcast_tree(m);
+                }
+            }, 0);
         }
-
     }
 }
