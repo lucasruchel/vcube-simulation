@@ -125,7 +125,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
             }
         }
 
-        receivedMap.get(data.getData()).addAll(tsaggr);
+     //   receivedMap.get(data.getData()).addAll(tsaggr);
 
         forward(data.getSource(),m.getSource(),data.getData(),tsaggr,FWD);
 
@@ -274,7 +274,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
                 boolean deliverable = isReceivedFromAll(data);
 
                 AtomicDataMessage ack = new AtomicDataMessage(me, tsi, data);
-                ack.setDeliverable(deliverable);
+                //ack.setDeliverable(deliverable);
 
                 // Reenvia para os vizinhos a mensagem
                 for (int i : vcube.subtree(me,me)) {
@@ -300,7 +300,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
 //            broadcast_tree(m);
 //        }
 
-        if (me == 0){
+        if (me < 2){
             NekoSystem.instance().getTimer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -312,16 +312,6 @@ public class AtomicBroadcast extends AbstractBroadcast {
             }, 0);
         }
 
-        if (me == 1){
-            NekoSystem.instance().getTimer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    String message = "Dados"+me +"-c" + process.clock();
-                    Data m = new Data(me,message);
 
-                    broadcast_tree(m);
-                }
-            }, 0);
-        }
     }
 }
