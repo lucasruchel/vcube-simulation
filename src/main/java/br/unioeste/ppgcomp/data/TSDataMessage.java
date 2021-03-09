@@ -1,14 +1,11 @@
 package br.unioeste.ppgcomp.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 public class TSDataMessage implements Comparable<TSDataMessage>{
 
     private int p;
     private Data data;
     private int ts;
+
 
 
 
@@ -39,6 +36,8 @@ public class TSDataMessage implements Comparable<TSDataMessage>{
         hash = 97 * hash + this.ts;
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {
@@ -96,7 +95,9 @@ public class TSDataMessage implements Comparable<TSDataMessage>{
     public int compareTo(TSDataMessage o) {
         if (this.ts != o.ts)
             return this.ts - o.ts;
-        else
+        else if (this.p != o.p)
             return this.p - o.p;
+        else
+            return this.data.getSrc() - o.data.getSrc();
     }
 }

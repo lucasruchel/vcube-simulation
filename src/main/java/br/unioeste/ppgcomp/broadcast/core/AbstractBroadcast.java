@@ -18,7 +18,7 @@ import java.util.logging.Level;
 
 public abstract class AbstractBroadcast extends CrashProtocol implements FailureDetectorListener {
 
-    protected boolean DEBUG = false;
+    protected boolean DEBUG = true;
 
     protected double DELAY = 0.0;
 
@@ -98,7 +98,6 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
         NekoSystem.instance().getTimer().schedule(new DeliverTask(m), Parametros.RT);
     }
 
-    @Override
     public void send(NekoMessage m) {
         if (!isCrashed()){
             broadcast(m);
@@ -119,7 +118,7 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
     @Override
     public void statusChange(boolean suspected, int p) {
         if (suspected && vcube.getCorrects().contains(p)){
-            //    System.out.println(String.format("p%s: Foi detectado falha do %s no tempo %s", me,p,process.clock()));
+            System.out.println(String.format("p%s: Foi detectado falha do %s no tempo %s", me,p,process.clock()));
             for (int i = 0; i < vcube.getCorrects().size(); i++) {
                 if (vcube.getCorrects().get(i) == p){
                     //System.err.println(String.format("p%s: Processo %s excluído da lista de corretos", me,p));

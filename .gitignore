@@ -3,4 +3,5 @@ target/classes target/generated-sources
 target/
 .idea/
 logs/
+*.log
 

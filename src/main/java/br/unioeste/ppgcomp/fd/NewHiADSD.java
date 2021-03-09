@@ -13,7 +13,7 @@ import java.util.List;
 
 public class NewHiADSD  extends CrashProtocol {
     // Configurações
-    protected static final double DEFAULT_TIMEOUT = 4 ;
+    protected static final double DEFAULT_TIMEOUT = 5 ;
     protected static final double INTERVAL = 1;
 
     // Número de processos
@@ -38,10 +38,6 @@ public class NewHiADSD  extends CrashProtocol {
     // Lista de Listeners do detector de falhas
     private List<FailureDetectorListener> listeners;
 
-    @Override
-    public void send(NekoMessage m) {
-
-    }
 
     enum STATE {
         FAULTY,
@@ -145,7 +141,7 @@ public class NewHiADSD  extends CrashProtocol {
 
             // Envia resposta para o processo que enviou a mensagem com uma cópia do vetor de timestamps
             NekoMessage m1 = new NekoMessage(me, new int[]{m.getSource()}, FailureDetectorInitializer.PROTOCOL_NAME,ts.clone(), I_AM_ALIVE);
-            send(m1);
+            sender.send(m1);
 
 
         } else if (m.getType() == I_AM_ALIVE){
@@ -251,7 +247,7 @@ public class NewHiADSD  extends CrashProtocol {
                     if (ff_neighboor(j,i) == me && states[j] == STATE.FAULT_FREE) {
                         responses.add(j);
                         NekoMessage m = new NekoMessage(new int[]{j}, FailureDetectorInitializer.PROTOCOL_NAME, null, ARE_YOU_ALIVE);
-                        send(m);
+                        sender.send(m);
 
                     }
                 }

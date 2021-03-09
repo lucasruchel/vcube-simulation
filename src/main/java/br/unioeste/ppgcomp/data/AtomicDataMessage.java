@@ -6,11 +6,21 @@ public class AtomicDataMessage {
     private int source;
     private TreeSet<TSDataMessage> tsaggr;
     private Data data;
+    private boolean deliverable;
 
     public AtomicDataMessage(int source, TreeSet<TSDataMessage> tsaggr, Data data) {
         this.source = source;
         this.tsaggr = tsaggr;
         this.data = data;
+        this.deliverable = false;
+    }
+
+    public boolean isDeliverable() {
+        return deliverable;
+    }
+
+    public void setDeliverable(boolean deliverable) {
+        this.deliverable = deliverable;
     }
 
     public int getSource() {
