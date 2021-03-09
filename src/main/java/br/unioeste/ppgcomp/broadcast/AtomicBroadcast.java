@@ -11,7 +11,7 @@ import java.util.*;
 
 public class AtomicBroadcast extends AbstractBroadcast {
 
-
+    Map<Data,Set> receivedMap = new HashMap<>();
 
     // Conjunto de mensagens marcadas
     private TreeSet<TSDataMessage> stamped;
@@ -61,6 +61,9 @@ public class AtomicBroadcast extends AbstractBroadcast {
         // Encaminha para subárvore
         forward(me,me,m,tsaggr,TREE);
         received.addAll(tsaggr);
+        dataset.add(m);
+
+        receivedMap.put(m,tsaggr);
 
         // Incrementa contador
         lc++;
@@ -102,11 +105,14 @@ public class AtomicBroadcast extends AbstractBroadcast {
         // subree src
         List<Integer> subtree_src = vcube.subtree(me, m.getSource());
 
-        TSDataMessage ts = new TSDataMessage(me, data.getData(), lc);
-        tsaggr.add(ts);
+        tsaggr.addAll(getAllTs(data.getData()));
 
         if (!dataset.contains(data.getData())) {
             dataset.add(data.getData());
+            receivedMap.put(data.getData(),tsaggr);
+
+            TSDataMessage ts = new TSDataMessage(me,data.getData(),lc);
+            tsaggr.add(ts);
 
             for (int i : vcube.subtree(me,me)) {
                 if (!subtree_src.contains(i)) {
@@ -119,7 +125,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
             }
         }
 
-
+        receivedMap.get(data.getData()).addAll(tsaggr);
 
         forward(data.getSource(),m.getSource(),data.getData(),tsaggr,FWD);
 
@@ -139,6 +145,28 @@ public class AtomicBroadcast extends AbstractBroadcast {
             doDeliver(data.getData(),sm);
         }
 
+    }
+
+    public TreeSet<TSDataMessage> getAllTs(Data data){
+        TreeSet<TSDataMessage> timestamps = new TreeSet<>();
+
+        for (TSDataMessage ts : received){
+            if (ts.getData().equals(data))
+                timestamps.add(ts);
+        }
+
+        return timestamps;
+    }
+
+    public TSDataMessage getAllTsOfP(Data data,int p){
+        TreeSet<TSDataMessage> timestamps = getAllTs(data);
+
+        for (TSDataMessage ts : timestamps)
+            if (ts.getP() == p){
+                return ts;
+            }
+
+        return null;
     }
 
     private void doDeliver(Data data,int sm){
@@ -240,7 +268,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
 
                 TreeSet<TSDataMessage> tsi = new TreeSet<TSDataMessage>();
-                tsi.add(new TSDataMessage(me,data,lc));
+
+                tsi.add(getAllTsOfP(data,me));
 
                 boolean deliverable = isReceivedFromAll(data);
 
@@ -258,18 +287,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
                     iterator.remove();
                     continue;
                 }
-
-
             }
-
-
-
-
-
         }
-
-
-
     }
 
     @Override
@@ -302,7 +321,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
                     broadcast_tree(m);
                 }
-            }, 5);
+            }, 0);
         }
     }
 }
