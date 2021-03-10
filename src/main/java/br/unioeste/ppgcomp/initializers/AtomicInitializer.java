@@ -32,7 +32,7 @@ public class AtomicInitializer implements NekoProcessInitializer {
 
 
         //Inicia execução
-        fd.launch();
+//        fd.launch();
         atomic.launch();
 
 

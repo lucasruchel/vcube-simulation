@@ -1,20 +1,16 @@
 package br.unioeste.ppgcomp.broadcast.core;
 
 import br.unioeste.ppgcomp.config.Parametros;
-import br.unioeste.ppgcomp.data.Data;
-import br.unioeste.ppgcomp.data.TSDataMessage;
+import br.unioeste.ppgcomp.data.AtomicData;
 import br.unioeste.ppgcomp.fault.CrashProtocol;
 import br.unioeste.ppgcomp.topologia.VCube;
 import lse.neko.*;
 import lse.neko.failureDetectors.FailureDetectorListener;
 import lse.neko.util.TimerTask;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
 
 public abstract class AbstractBroadcast extends CrashProtocol implements FailureDetectorListener {
 
@@ -108,10 +104,13 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
         sender.send(m);
     }
 
-    public class DeliverComparator implements Comparator<TSDataMessage> {
+    public class DeliverComparator implements Comparator<AtomicData> {
         @Override
-        public int compare(TSDataMessage o1, TSDataMessage o2) {
-            return o1.getTs() - o2.getTs();
+        public int compare(AtomicData o1, AtomicData o2) {
+            if (o2.getTimestamp().getTs() != o1.getTimestamp().getTs())
+                return o1.getTimestamp().getTs() - o2.getTimestamp().getTs();
+            else
+                return o1.getTimestamp().getId() - o2.getTimestamp().getTs();
         }
     }
 

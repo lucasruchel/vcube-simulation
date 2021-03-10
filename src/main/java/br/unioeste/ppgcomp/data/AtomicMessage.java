@@ -1,27 +1,21 @@
 package br.unioeste.ppgcomp.data;
 
+import java.util.Set;
 import java.util.TreeSet;
 
-public class AtomicDataMessage {
+public class AtomicMessage {
     private int source;
-    private TreeSet<TSDataMessage> tsaggr;
+    private TreeSet<Timestamp> tsaggr;
     private Data data;
-    private boolean deliverable;
 
-    public AtomicDataMessage(int source, TreeSet<TSDataMessage> tsaggr, Data data) {
+    public AtomicMessage(int source, TreeSet<Timestamp> tsaggr, Data data) {
         this.source = source;
         this.tsaggr = tsaggr;
         this.data = data;
-        this.deliverable = false;
+
     }
 
-    public boolean isDeliverable() {
-        return deliverable;
-    }
 
-    public void setDeliverable(boolean deliverable) {
-        this.deliverable = deliverable;
-    }
 
     public int getSource() {
         return source;
@@ -31,11 +25,11 @@ public class AtomicDataMessage {
         this.source = source;
     }
 
-    public TreeSet<TSDataMessage> getTsaggr() {
+    public Set<Timestamp> getTsaggr() {
         return tsaggr;
     }
 
-    public void setTsaggr(TreeSet<TSDataMessage> tsaggr) {
+    public void setTsaggr(TreeSet<Timestamp> tsaggr) {
         this.tsaggr = tsaggr;
     }
 
@@ -56,7 +50,7 @@ public class AtomicDataMessage {
         return  "{" + source +
                 data +
                 '}' +
-                 " tsaggr ={"+ tsaggr +
+                 "tsaggr ={"+ tsaggr +
                 "}," ;
     }
 }
