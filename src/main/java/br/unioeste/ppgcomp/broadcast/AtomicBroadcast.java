@@ -97,27 +97,24 @@ public class AtomicBroadcast extends AbstractBroadcast {
         AtomicMessage data = (AtomicMessage) m.getContent();
 
         this.lc = Math.max(lc + 1,data.getMaxTimestamp());
+
         TreeSet<Timestamp> tsaggr = new TreeSet<>(data.getTsaggr());
 
-        // subree src
-        List<Integer> subtree_src = vcube.subtree(me, m.getSource());
-
-        Set<Timestamp> timestamps = received.get(data.getData());
-        if (timestamps != null) {
-            tsaggr.addAll(timestamps);
-        }
 
         if (!dataset.contains(data.getData())) {
             dataset.add(data.getData());
 
+            TreeSet<Timestamp> tsi = new TreeSet<>();
             Timestamp ts = new Timestamp(me,lc);
-            tsaggr.add(ts);
 
+            tsaggr.add(ts);
+            tsi.add(ts);
+
+            // subree src
+            List<Integer> subtree_src = vcube.subtree(me, m.getSource());
 
             for (int i : vcube.subtree(me,me)) {
                 if (!subtree_src.contains(i)) {
-                    TreeSet<Timestamp> tsi = new TreeSet<Timestamp>();
-                    tsi.add(ts);
 
                     AtomicMessage ack = new AtomicMessage(me, tsi, data.getData());
                     send(new NekoMessage(me, new int[]{i}, getId(), ack, ACK));
@@ -130,8 +127,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
 //        Verifica se a mensagem já foi entregue, sem processamento desnecessario se já houver sido
         if (!contains(delivered, data.getData()) && stamped.get(data.getData()) == null)
-            if (!received.containsKey(data))
-                received.put(data.getData(),tsaggr);
+            if (!received.containsKey(data.getData()))
+                received.put(data.getData(),new TreeSet<>(tsaggr));
             else
                 received.get(data.getData()).addAll(tsaggr);
 
@@ -149,11 +146,13 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
 
 
-    public Timestamp getAllTsOfP(Data data,int p){
-        Set<Timestamp> timestamps = received.get(data);
+    public Timestamp getTsOfMe(Set<Timestamp> timestamps){
+        if (timestamps == null || timestamps.size() == 0) {
+            return null;
+        }
 
         for (Timestamp ts : timestamps)
-            if (ts.getId() == p){
+            if (ts.getId() == me){
                 return ts;
             }
 
@@ -211,6 +210,10 @@ public class AtomicBroadcast extends AbstractBroadcast {
         return max;
     }
     private boolean isReceivedFromAll(Set<Timestamp> timestamps){
+        if (timestamps == null) {
+            return false;
+        }
+
         int counter = timestamps.size();
 
         // Se contador for menor significa que nem todos receberam a mensagem
@@ -242,6 +245,17 @@ public class AtomicBroadcast extends AbstractBroadcast {
                 }
             }, 0);
         }
+//        if (me < 1){
+//            NekoSystem.instance().getTimer().schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    String message = "Dados"+me +"-c" + process.clock();
+//                    Data m = new Data(me,message);
+//
+//                    broadcast_tree(m);
+//                }
+//            }, 8);
+//        }
 
 
     }

@@ -1,5 +1,7 @@
 package br.unioeste.ppgcomp.data;
 
+import java.util.Objects;
+
 public class Timestamp implements Comparable<Timestamp> {
     private int id;
     private int ts;
@@ -33,6 +35,18 @@ public class Timestamp implements Comparable<Timestamp> {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Timestamp)) return false;
+        Timestamp timestamp = (Timestamp) o;
+        return id == timestamp.id && ts == timestamp.ts;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, ts);
+    }
 
     @Override
     public int compareTo(Timestamp o) {
