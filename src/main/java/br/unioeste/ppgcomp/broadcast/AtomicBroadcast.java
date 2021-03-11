@@ -15,6 +15,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
     private Map<Data,Set<Timestamp>> received;
 
+    private TreeSet<ACKMessage> pendingACK;
+
 
     // Conjunto de mensagens que são marcadas para entrega, mas que precisam de ordenação
     private TreeSet<AtomicData> delivered;
@@ -28,9 +30,11 @@ public class AtomicBroadcast extends AbstractBroadcast {
     private static final int TREE = 1301;
     private static final int FWD = 1302;
     private static final int ACK = 1303;
+    private static final int RPL = 1304;
 
     static{
         MessageTypes.instance().register(TREE,"TREE");
+        MessageTypes.instance().register(RPL,"RPL");
         MessageTypes.instance().register(FWD,"FWD");
         MessageTypes.instance().register(ACK,"ACK");
 
@@ -42,6 +46,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
         stamped = new HashMap<>();
         received = new HashMap<>();
         delivered = new TreeSet<>();
+        pendingACK = new TreeSet<>();
         dataset = new ArrayList<>();
 
         this.lc = 0;
@@ -76,7 +81,10 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
             NekoMessage m = new NekoMessage(from,new int[]{p},getId(),treeMessage,type);
             NekoSystem.instance().getTimer().schedule(new SenderTask(m), delay);
+
             delay += DELAY;
+
+            pendingACK.add(new ACKMessage(p,data, from,source));
         }
     }
     public boolean contains(TreeSet<AtomicData> list,Data o){
@@ -93,15 +101,54 @@ public class AtomicBroadcast extends AbstractBroadcast {
         if (isCrashed())
             return;
 
+        // Processa ACK
+        if (m.getType() == ACK){
+
+
+
+            ACKMessage receivedAck = (ACKMessage) m.getContent();
+            int source = m.getSource();
+
+
+            if (receivedAck.getRoot() == 7 && m.getSource() == 1 && me == 3)
+                System.out.println("");
+
+
+
+
+            ACKMessage ack = null;
+            for (ACKMessage pending : pendingACK){
+                if (pending.getRoot() == receivedAck.getRoot() &&
+                        pending.getId() == source &&
+                        pending.getData().equals(receivedAck.getData())
+                    ){
+                    ack = pending;
+                    break;
+                }
+            }
+            if (ack != null)
+                pendingACK.remove(ack);
+
+            if (ack != null && ack.getSource() != me)
+                checkAcks(ack.getSource(), ack.getData(),ack.getRoot());
+
+            return;
+        }
+
+
         //Dados da mensagem
         AtomicMessage data = (AtomicMessage) m.getContent();
+
+
 
         this.lc = Math.max(lc + 1,data.getMaxTimestamp());
 
         TreeSet<Timestamp> tsaggr = new TreeSet<>(data.getTsaggr());
 
+        // Verifica processos vizinhos que pertencem a raiz da mensagem
+        List<Integer> subtree_src = vcube.subtree(me, m.getSource());
 
-        if (!dataset.contains(data.getData())) {
+         if (!dataset.contains(data.getData())) {
             dataset.add(data.getData());
 
             TreeSet<Timestamp> tsi = new TreeSet<>();
@@ -110,20 +157,23 @@ public class AtomicBroadcast extends AbstractBroadcast {
             tsaggr.add(ts);
             tsi.add(ts);
 
-            // subree src
-            List<Integer> subtree_src = vcube.subtree(me, m.getSource());
-
             for (int i : vcube.subtree(me,me)) {
                 if (!subtree_src.contains(i)) {
 
-                    AtomicMessage ack = new AtomicMessage(me, tsi, data.getData());
-                    send(new NekoMessage(me, new int[]{i}, getId(), ack, ACK));
+                    AtomicMessage tree = new AtomicMessage(me, tsi, data.getData());
+                    send(new NekoMessage(me, new int[]{i}, getId(), tree, RPL));
+
+                    pendingACK.add(new ACKMessage(i,data.getData(), me,me));
                 }
             }
         }
 
 
         forward(data.getSource(),m.getSource(),data.getData(),tsaggr,FWD);
+        for (int j : subtree_src){
+            // Para recuperar confirmações de entrega
+            pendingACK.add(new ACKMessage(j,data.getData(), m.getSource(),data.getSource()));
+        }
 
 //        Verifica se a mensagem já foi entregue, sem processamento desnecessario se já houver sido
         if (!contains(delivered, data.getData()) && stamped.get(data.getData()) == null)
@@ -134,6 +184,12 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
 
 
+
+
+
+
+        checkAcks(m.getSource(),data.getData(),data.getSource());
+
 //        System.out.println(String.format("p%s: Received de %s processos, clock=%s", me,received.size(),process.clock()));
 
         if (isReceivedFromAll(received.get(data.getData()))){
@@ -141,10 +197,21 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
             doDeliver(data.getData(),sm);
         }
-
     }
 
+    public void checkAcks(int src, Data data, int root){
+        for (ACKMessage pending: pendingACK){
+            if (pending.getRoot() == root  && pending.getData().equals(data)){
+                return;
+            }
+        }
 
+        ACKMessage ack = new ACKMessage(me,data,src, root);
+
+        NekoMessage mr = new NekoMessage(new int[]{src},getId(),ack,ACK);
+        send(mr);
+
+    }
 
     public Timestamp getTsOfMe(Set<Timestamp> timestamps){
         if (timestamps == null || timestamps.size() == 0) {
@@ -187,6 +254,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
                 stamped.remove(m_);
             }
         }
+
+
 
 
 
@@ -234,7 +303,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
 //            broadcast_tree(m);
 //        }
 
-        if (me < 2){
+        if (me < 1){
             NekoSystem.instance().getTimer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -245,17 +314,17 @@ public class AtomicBroadcast extends AbstractBroadcast {
                 }
             }, 0);
         }
-//        if (me < 1){
-//            NekoSystem.instance().getTimer().schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    String message = "Dados"+me +"-c" + process.clock();
-//                    Data m = new Data(me,message);
-//
-//                    broadcast_tree(m);
-//                }
-//            }, 8);
-//        }
+        if (me == 7){
+            NekoSystem.instance().getTimer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    String message = "Dados"+me +"-c" + process.clock();
+                    Data m = new Data(me,message);
+
+                    broadcast_tree(m);
+                }
+            }, 1);
+        }
 
 
     }

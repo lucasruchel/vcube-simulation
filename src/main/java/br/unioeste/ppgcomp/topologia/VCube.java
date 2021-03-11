@@ -37,6 +37,8 @@ public class VCube {
         }
     }
 
+
+
     /***
      *
      * @param p nó do hipercube em que será obtida a vizinhança
@@ -103,6 +105,16 @@ public class VCube {
             s++;
         }
         return --s;
+    }
+
+    public int father(int i, int src) {
+        int s = cluster(i, src);
+        System.out.println("s = " + s);
+        int f = ff_neighboor(src, s);
+        System.out.println("f = " + f);
+        if (f == i)
+            return src;
+        else return father(i, f);
     }
 
 }
