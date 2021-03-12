@@ -1,13 +1,14 @@
 package br.unioeste.ppgcomp.data;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class AtomicData implements Comparable<AtomicData>{
-   private Timestamp timestamp;
+   private Integer timestamp;
     private Data data;
 
-    public AtomicData( Data data, Timestamp timestamp) {
+    public AtomicData( Data data, Integer timestamp) {
 
         this.timestamp = timestamp;
         this.data = data;
@@ -26,8 +27,21 @@ public class AtomicData implements Comparable<AtomicData>{
         this.data = data;
     }
 
-    public Timestamp getTimestamp() {
+    public Integer getTimestamp() {
         return timestamp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AtomicData)) return false;
+        AtomicData that = (AtomicData) o;
+        return Objects.equals(timestamp, that.timestamp) && Objects.equals(data, that.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timestamp, data);
     }
 
     @Override
@@ -38,12 +52,15 @@ public class AtomicData implements Comparable<AtomicData>{
                 '}';
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(Integer timestamp) {
         this.timestamp = timestamp;
     }
 
     @Override
     public int compareTo(AtomicData o) {
-        return timestamp.compareTo(o.timestamp);
+        if (this.data.getSrc() != o.getData().getSrc())
+            return this.data.getSrc() - o.getData().getSrc();
+        else
+            return this.timestamp - o.getTimestamp();
     }
 }

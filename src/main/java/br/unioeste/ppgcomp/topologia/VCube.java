@@ -99,6 +99,8 @@ public class VCube {
         return (MSB(i,j) + 1);
     }
 
+
+
     public int MSB(int i, int j) {
         int s = 0;
         for (int k = i ^ j; k > 0; k = k >> 1) {

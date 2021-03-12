@@ -107,10 +107,10 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
     public class DeliverComparator implements Comparator<AtomicData> {
         @Override
         public int compare(AtomicData o1, AtomicData o2) {
-            if (o2.getTimestamp().getTs() != o1.getTimestamp().getTs())
-                return o1.getTimestamp().getTs() - o2.getTimestamp().getTs();
+            if (o2.getTimestamp() != o1.getTimestamp())
+                return o1.getTimestamp() - o2.getTimestamp();
             else
-                return o1.getTimestamp().getId() - o2.getTimestamp().getTs();
+                return o1.getData().getSrc() - o2.getData().getSrc();
         }
     }
 

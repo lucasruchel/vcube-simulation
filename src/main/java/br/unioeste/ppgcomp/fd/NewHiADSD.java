@@ -280,6 +280,7 @@ public class NewHiADSD  extends CrashProtocol {
         // Falha do process, não respondeu
         if (m == null){
             logger.fine(String.format("-------->>   processo %s falho !!!!!", j));
+            STATE before = states[j];
             states[j] = STATE.FAULTY;
 
             if(ts[j] == -1)
@@ -288,7 +289,9 @@ public class NewHiADSD  extends CrashProtocol {
             ts[j]++;
 
             // Suspeita de processo e avisa listeners
-            suspect(j);
+
+            if (before == STATE.FAULT_FREE)
+                suspect(j);
 
         } else {
             int source = m.getSource();
@@ -317,8 +320,10 @@ public class NewHiADSD  extends CrashProtocol {
 
                     // Atualiza estado, caso processo esteja faltoso
                     if (ts[i] % 2 == 1){
+                        STATE before = states[i];
                         states[i] = STATE.FAULTY;
-                        suspect(i);
+                        if (before == STATE.FAULT_FREE)
+                            suspect(i);
                     } else {
                         states[i] = STATE.FAULT_FREE;
                         unsuspect(i);
