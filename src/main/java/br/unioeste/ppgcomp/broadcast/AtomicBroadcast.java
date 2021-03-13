@@ -71,6 +71,15 @@ public class AtomicBroadcast extends AbstractBroadcast {
         lc++;
     }
 
+    public void replay(int source, int from, int id, Data data, TreeSet<Timestamp> tsaggr, int type ){
+        AtomicMessage treeMessage = new AtomicMessage(source,tsaggr,data);
+
+        NekoMessage m = new NekoMessage(from,new int[]{id},getId(),treeMessage,type);
+        NekoSystem.instance().getTimer().schedule(new SenderTask(m), DELAY);
+
+        pendingACK.add(new ACKMessage(id,data, from,source));
+    }
+
     public void forward(int source, int from, Data data, TreeSet<Timestamp> tsaggr,int type){
         // Utiliza overlay do vcube para definir destinos em uma topologia de árvore
         List<Integer> destinos = vcube.subtree(me,from);
@@ -105,6 +114,9 @@ public class AtomicBroadcast extends AbstractBroadcast {
         if (m.getType() == ACK){
             ACKMessage receivedAck = (ACKMessage) m.getContent();
             int source = m.getSource();
+
+            if (me == 4 && source == 0)
+                System.out.println("");
 
             ACKMessage ack = null;
             for (ACKMessage pending : pendingACK){
@@ -152,6 +164,9 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
                     AtomicMessage tree = new AtomicMessage(me, tsi, data.getData());
                     send(new NekoMessage(me, new int[]{i}, getId(), tree, RPL));
+
+                    if (me == 4 && i == 0)
+                        System.out.println("");
 
                     pendingACK.add(new ACKMessage(i,data.getData(), me,me));
                 }
@@ -296,6 +311,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
         if (suspected && isPending(p) ){
 
+            if (me == 4)
+                System.out.println("");
 
             TreeSet<ACKMessage> removeAcks = new TreeSet<>();
 
@@ -358,8 +375,11 @@ public class AtomicBroadcast extends AbstractBroadcast {
                         }
 
 
+                        if (ack.getRoot() == me)
+                            replay(me, ack.getSource(), next, ack.getData(),tsaggr,RPL);
+                        else
+                            replay(ack.getRoot(), ack.getSource(), next, ack.getData(),tsaggr,RPL);
 
-                        forward(ack.getRoot(), ack.getSource(), ack.getData(),tsaggr,FWD);
                         //newPendings.add(new ACKMessage(next,ack.getData(), ack.getSource(),ack.getRoot()));
                         System.out.println("Reenviando mensagem para " + next);
                     }
@@ -467,16 +487,16 @@ public class AtomicBroadcast extends AbstractBroadcast {
             }, 1);
         }
 //
-        if (me == 1){
-            NekoSystem.instance().getTimer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    String message = "Dados"+me +"-c" + process.clock();
-                    Data m = new Data(me,message);
-
-                    broadcast_tree(m);
-                }
-            }, 18);
-        }
+//        if (me == 3){
+//            NekoSystem.instance().getTimer().schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    String message = "Dados"+me +"-c" + process.clock();
+//                    Data m = new Data(me,message);
+//
+//                    broadcast_tree(m);
+//                }
+//            }, 18);
+//        }
     }
 }

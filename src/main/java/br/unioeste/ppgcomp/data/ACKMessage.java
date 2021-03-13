@@ -75,9 +75,14 @@ public class ACKMessage implements Comparable<ACKMessage> {
 
     @Override
     public int compareTo(ACKMessage o) {
-        if (o.getRoot() != this.getRoot())
+        if (!data.equals(o.getData()))
+            return data.hashCode() - o.getData().hashCode();
+        else if (o.getRoot() != this.getRoot())
             return this.getRoot() - o.getRoot();
+        else if (this.source != o.source)
+            return this.source - o.source;
         else
             return this.id - o.id;
     }
+
 }
