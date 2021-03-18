@@ -2,12 +2,9 @@ package br.unioeste.ppgcomp.broadcast;
 
 import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.data.AckData;
-import br.unioeste.ppgcomp.data.Data;
 import br.unioeste.ppgcomp.data.TreeData;
-import br.unioeste.ppgcomp.fault.CrashProtocol;
-import br.unioeste.ppgcomp.topologia.VCube;
+import br.unioeste.ppgcomp.topologia.VCubeTopology;
 import lse.neko.*;
-import lse.neko.failureDetectors.FailureDetectorListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,7 @@ public class TreeReliableBroadcast extends AbstractBroadcast {
     private List<Integer> corrects;
 
     private List<TreeData> delivered;
-    private VCube vcube;
+    private VCubeTopology vcube;
 
     private int timestamp;
     private int np;
@@ -57,7 +54,7 @@ public class TreeReliableBroadcast extends AbstractBroadcast {
             corrects.add(i);
         }
 
-        vcube = new VCube(log2(np));
+        vcube = new VCubeTopology(log2(np));
         vcube.setCorrects(corrects);
     }
 

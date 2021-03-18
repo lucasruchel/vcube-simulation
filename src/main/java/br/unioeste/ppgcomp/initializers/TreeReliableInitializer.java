@@ -1,7 +1,8 @@
 package br.unioeste.ppgcomp.initializers;
 
 import br.unioeste.ppgcomp.broadcast.TreeReliableBroadcast;
-import br.unioeste.ppgcomp.fd.NewHiADSD;
+import br.unioeste.ppgcomp.fd.VCubeFD;
+import br.unioeste.ppgcomp.topologia.VCubeTopology;
 import lse.neko.NekoProcess;
 import lse.neko.NekoProcessInitializer;
 import lse.neko.SenderInterface;
@@ -15,7 +16,9 @@ public class TreeReliableInitializer implements NekoProcessInitializer {
     public void init(NekoProcess process, Configurations config) throws Exception {
         // Tipo de rede definido nos arquivos de configuração
         SenderInterface sender = process.getDefaultNetwork();
-        NewHiADSD fd = new NewHiADSD(process,sender,PROTOCOL_NAME);
+
+        VCubeTopology topo = new VCubeTopology(process.getN());
+        VCubeFD fd = new VCubeFD(process,sender,PROTOCOL_NAME,topo);
         fd.setId(PROTOCOL_NAME);
 
 

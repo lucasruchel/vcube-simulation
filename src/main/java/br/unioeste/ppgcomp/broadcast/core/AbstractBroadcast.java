@@ -3,7 +3,8 @@ package br.unioeste.ppgcomp.broadcast.core;
 import br.unioeste.ppgcomp.config.Parametros;
 import br.unioeste.ppgcomp.data.AtomicData;
 import br.unioeste.ppgcomp.fault.CrashProtocol;
-import br.unioeste.ppgcomp.topologia.VCube;
+import br.unioeste.ppgcomp.topologia.AbstractTopology;
+import br.unioeste.ppgcomp.topologia.VCubeTopology;
 import lse.neko.*;
 import lse.neko.failureDetectors.FailureDetectorListener;
 import lse.neko.util.TimerTask;
@@ -16,7 +17,7 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
 
     protected boolean DEBUG = true;
 
-    protected double DELAY = 0.0;
+    protected double DELAY = 0.1;
 
     // Identificador do process
     protected int me;
@@ -27,7 +28,7 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
     protected int dim;
 
     // Overlay dos processos para encaminhamento em árvore
-    protected VCube vcube;
+    protected AbstractTopology topo;
 
     public AbstractBroadcast(NekoProcess process, SenderInterface sender, String name) {
         super(process, sender, name);
@@ -41,8 +42,8 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
         }
 
         dim = (int) (Math.log10(np)/Math.log10(2));
-        vcube = new VCube(dim);
-        vcube.setCorrects(corretos);
+        topo = new VCubeTopology(dim);
+        topo.setCorrects(corretos);
     }
 
 
@@ -116,12 +117,12 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
 
     @Override
     public void statusChange(boolean suspected, int p) {
-        if (suspected && vcube.getCorrects().contains(p)){
+        if (suspected && topo.getCorrects().contains(p)){
             System.out.println(String.format("p%s: Foi detectado falha do %s no tempo %s", me,p,process.clock()));
-            for (int i = 0; i < vcube.getCorrects().size(); i++) {
-                if (vcube.getCorrects().get(i) == p){
+            for (int i = 0; i < topo.getCorrects().size(); i++) {
+                if (topo.getCorrects().get(i) == p){
                     //System.err.println(String.format("p%s: Processo %s excluído da lista de corretos", me,p));
-                    vcube.getCorrects().remove(i);
+                    topo.getCorrects().remove(i);
                     break;
                 }
 

@@ -31,7 +31,7 @@ public abstract class CrashProtocol extends ActiveReceiver
         loadConfig();
 
 
-        crashed = new Boolean(false);
+        crashed = false;
     }
 
     public void crash() {

@@ -3,24 +3,16 @@ package br.unioeste.ppgcomp.topologia;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VCube {
+public class VCubeTopology extends AbstractTopology {
 
     private int dim;
 
-    public VCube(int dimensoes){
-        this.dim = dimensoes;
+    public VCubeTopology(int n){
+        super(n);
+
+
+        this.dim = (int) Math.ceil(Math.log10(n)/Math.log10(2));
     }
-
-    private List<Integer> corrects;
-
-    public List<Integer> getCorrects() {
-        return corrects;
-    }
-
-    public void setCorrects(List<Integer> corrects) {
-        this.corrects = corrects;
-    }
-
 
     /***
      *
@@ -109,14 +101,50 @@ public class VCube {
         return --s;
     }
 
-    public int father(int i, int src) {
-        int s = cluster(i, src);
-        System.out.println("s = " + s);
-        int f = ff_neighboor(src, s);
-        System.out.println("f = " + f);
-        if (f == i)
-            return src;
-        else return father(i, f);
+
+    // Retorna todos os vizinhos
+    @Override
+    public List<Integer> destinations(int me) {
+        return this.subtree(me,me);
     }
 
+    @Override
+    public List<Integer> destinations(int me, int source) {
+        return this.subtree(me,source);
+    }
+
+    @Override
+    public int nextNeighboor(int me, int old) {
+        int cluster = this.cluster(me, old);
+
+
+        return this.ff_neighboor(me, cluster);
+    }
+
+    @Override
+    public List<Integer> fathers(int p, int root) {
+        List<Integer> superTree = new ArrayList<>();
+
+        getFathers(superTree,root,p);
+
+        return superTree;
+    }
+
+
+    private void getFathers(List<Integer> elem, int root,int p){
+
+       elem.add(root);
+
+       if (root == p)
+           return;
+
+       int n = ff_neighboor(root, cluster(root,p));
+
+       getFathers(elem,n,p);
+    }
+
+//    Arredonda para cima 3.13, por exemplo, indicará que terá 4 dimensões
+    public int log2(int v){
+        return  (int) Math.ceil(Math.log(v)/Math.log(2));
+    }
 }

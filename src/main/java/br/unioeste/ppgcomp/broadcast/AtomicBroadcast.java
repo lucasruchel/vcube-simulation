@@ -2,6 +2,7 @@ package br.unioeste.ppgcomp.broadcast;
 
 import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.data.*;
+import br.unioeste.ppgcomp.topologia.AbstractTopology;
 import lse.neko.*;
 import lse.neko.util.TimerTask;
 
@@ -40,7 +41,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
     }
 
-    public AtomicBroadcast(NekoProcess process, SenderInterface sender, String name) {
+    public AtomicBroadcast(NekoProcess process, SenderInterface sender, String name, AbstractTopology topo) {
         super(process, sender, name);
 
         stamped = new HashMap<>();
@@ -50,6 +51,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
         dataset = new ArrayList<>();
 
         this.lc = 0;
+        this.topo = topo;
 
     }
 
@@ -82,7 +84,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
     public void forward(int source, int from, Data data, TreeSet<Timestamp> tsaggr,int type){
         // Utiliza overlay do vcube para definir destinos em uma topologia de árvore
-        List<Integer> destinos = vcube.subtree(me,from);
+        List<Integer> destinos = topo.destinations(me,from);
 
         double delay = DELAY;
         for (int p : destinos){
@@ -115,9 +117,6 @@ public class AtomicBroadcast extends AbstractBroadcast {
             ACKMessage receivedAck = (ACKMessage) m.getContent();
             int source = m.getSource();
 
-            if (me == 4 && source == 0)
-                System.out.println("");
-
             ACKMessage ack = null;
             for (ACKMessage pending : pendingACK){
                 if (pending.getRoot() == receivedAck.getRoot() &&
@@ -148,7 +147,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
         TreeSet<Timestamp> tsaggr = new TreeSet<>(data.getTsaggr());
 
         // Verifica processos vizinhos que pertencem a raiz da mensagem
-        List<Integer> subtree_src = vcube.subtree(me, m.getSource());
+        List<Integer> subtree_src = topo.destinations(me, m.getSource());
 
          if (!dataset.contains(data.getData())) {
             dataset.add(data.getData());
@@ -159,14 +158,16 @@ public class AtomicBroadcast extends AbstractBroadcast {
             tsaggr.add(ts);
             tsi.add(ts);
 
-            for (int i : vcube.subtree(me,me)) {
+            double delay = DELAY;
+            for (int i : topo.destinations(me)) {
                 if (!subtree_src.contains(i)) {
 
                     AtomicMessage tree = new AtomicMessage(me, tsi, data.getData());
-                    send(new NekoMessage(me, new int[]{i}, getId(), tree, RPL));
+                    NekoMessage m1 = new NekoMessage(me, new int[]{i}, getId(), tree, RPL);
 
-                    if (me == 4 && i == 0)
-                        System.out.println("");
+                    NekoSystem.instance().getTimer().schedule(new SenderTask(m1), delay);
+
+                    delay += DELAY;
 
                     pendingACK.add(new ACKMessage(i,data.getData(), me,me));
                 }
@@ -214,7 +215,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
         ACKMessage ack = new ACKMessage(me,data,src, root);
 
         NekoMessage mr = new NekoMessage(new int[]{src},getId(),ack,ACK);
-        send(mr);
+
+        NekoSystem.instance().getTimer().schedule(new SenderTask(mr),DELAY);
 
     }
 
@@ -294,30 +296,20 @@ public class AtomicBroadcast extends AbstractBroadcast {
         int counter = timestamps.size();
 
         // Se contador for menor significa que nem todos receberam a mensagem
-        return counter >= vcube.getCorrects().size();
+        return counter >= topo.getCorrects().size();
     }
 
     @Override
     public synchronized void statusChange(boolean suspected, int p) {
         super.statusChange(suspected,p);
 
-        /*
-        1. i deve identificar ACKs pendentes de j que está falho
-        2. i realizar FWD para o próximo processo correto no cluster_i(j) de i (c_{i,s})
-        3. deve remover o timestamp de j para a mensagem m
-        4. deve tentar fazer deliver
-         */
-
+        if (isCrashed())
+            return;
 
         if (suspected && isPending(p) ){
-
-            if (me == 4)
-                System.out.println("");
-
             TreeSet<ACKMessage> removeAcks = new TreeSet<>();
 
             // Recupera ack pendente de p
-
             for (ACKMessage ack : pendingACK){
                if (ack.getId() == p) {
                    // Registro de ACKs pendentes que devem ser removidos e reprocessados
@@ -337,18 +329,14 @@ public class AtomicBroadcast extends AbstractBroadcast {
                }}
                 pendingACK.removeAll(removeAcks);
                  for (ACKMessage ack  : removeAcks){
-                     // Descobre próximo nó sem falha do cluster que p pertencia
-                     // -1 indica que não existe, falha de uma folha
-                     int cluster = vcube.cluster(me, ack.getId());
-                     int next = vcube.ff_neighboor(me, cluster);
+                     // próximo vizinho sem falha
+                     int next = topo.nextNeighboor(me,ack.getId());
 
                     // Reencaminha (FWD) mensagem de p
                     // Necessário identificar os Ts que agregariam a mensagem de p
                     if (next >= 0){
-                        List<Integer> pais = new ArrayList<>();
-                        pais.add(ack.getRoot());
+                        List<Integer> pais = topo.fathers(me,ack.getRoot());
 
-                        fathers(pais,ack.getRoot());
 
                         TreeSet<Timestamp> tsaggr = new TreeSet<>();
                         // Verifica se dados foram entregues ou marcados
@@ -371,7 +359,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
                             }
                             tsaggr.add(new Timestamp(me,ts));
                         } else {
-                            tsaggr = getTsOfSubTree(ack.getData(), pais);
+                            tsaggr = getTsOfProcesses(ack.getData(), pais);
                         }
 
 
@@ -413,7 +401,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
 
     // Função que retorna os Timestamps dos processos identificados em p
-    public TreeSet<Timestamp> getTsOfSubTree(Data data, List<Integer> p){
+    public TreeSet<Timestamp> getTsOfProcesses(Data data, List<Integer> p){
         TreeSet<Timestamp> stree = new TreeSet<>();
 
         if (!received.containsKey(data)){
@@ -433,17 +421,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
         return stree;
     }
 
-    // TODO Melhorar essa função para incluir a raiz original
-    public void fathers(List<Integer> elem, int root){
-        if (root == me)
-            return;
 
-        int n = vcube.ff_neighboor(root, vcube.cluster(root,me));
-
-        fathers(elem,n);
-
-        elem.add(n);
-    }
 
     // Verifica se o processo P enviou todas as confirmações das mensagens
     public boolean isPending(int p){
@@ -457,14 +435,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
     @Override
     public void run() {
-//        if (me == 0){
-//            String message = "Dados"+me;
-//            Data m = new Data(me,message);
-//
-//            broadcast_tree(m);
-//        }
 
-        if (me == 7){
+        if (me == 0){
             NekoSystem.instance().getTimer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -473,30 +445,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
                     broadcast_tree(m);
                 }
-            }, 0);
+            }, me);
         }
-        if (me == 7){
-            NekoSystem.instance().getTimer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    String message = "Dados"+me +"-c" + process.clock();
-                    Data m = new Data(me,message);
 
-                    broadcast_tree(m);
-                }
-            }, 1);
-        }
-//
-//        if (me == 3){
-//            NekoSystem.instance().getTimer().schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    String message = "Dados"+me +"-c" + process.clock();
-//                    Data m = new Data(me,message);
-//
-//                    broadcast_tree(m);
-//                }
-//            }, 18);
-//        }
     }
 }

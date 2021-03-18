@@ -1,14 +1,15 @@
 package br.unioeste.ppgcomp.initializers;
 
 import br.unioeste.ppgcomp.broadcast.AtomicBroadcast;
-import br.unioeste.ppgcomp.fd.NewHiADSD;
+import br.unioeste.ppgcomp.fd.VCubeFD;
+import br.unioeste.ppgcomp.topologia.AbstractTopology;
+import br.unioeste.ppgcomp.topologia.VCubeTopology;
 import lse.neko.NekoProcess;
 import lse.neko.NekoProcessInitializer;
 import lse.neko.SenderInterface;
-import lse.neko.util.logging.NekoLogger;
 import org.apache.java.util.Configurations;
 
-public class AtomicInitializer implements NekoProcessInitializer {
+public class VcubeAtomicInitializer implements NekoProcessInitializer {
 
     public static final String PROTOCOL_NAME = "New-hiADSD";
     public static final String PROTOCOL_APP = "Atomic-Broadcast";
@@ -16,14 +17,17 @@ public class AtomicInitializer implements NekoProcessInitializer {
     public void init(NekoProcess process, Configurations config) throws Exception {
         // Tipo de rede definido nos arquivos de configuração
         SenderInterface sender = process.getDefaultNetwork();
-        NewHiADSD fd = new NewHiADSD(process,sender,PROTOCOL_NAME);
+
+        VCubeTopology topo = new VCubeTopology(process.getN());
+        VCubeFD fd = new VCubeFD(process,sender,PROTOCOL_NAME,topo);
 
         fd.setId(PROTOCOL_NAME);
 
+//        Topologia inicializada com número de processos no sistema
+        AbstractTopology topology = new VCubeTopology(process.getN());
 
 
-
-        AtomicBroadcast atomic = new AtomicBroadcast(process,sender,PROTOCOL_APP);
+        AtomicBroadcast atomic = new AtomicBroadcast(process,sender,PROTOCOL_APP,topology);
         atomic.setId(PROTOCOL_APP);
 
 
@@ -32,7 +36,7 @@ public class AtomicInitializer implements NekoProcessInitializer {
 
 
         //Inicia execução
-        fd.launch();
+//        fd.launch();
         atomic.launch();
 
 
