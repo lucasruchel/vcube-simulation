@@ -29,8 +29,8 @@ public abstract class AbstractFailureDetector extends CrashProtocol {
 
 
     // Configurações
-    protected static final double DEFAULT_TIMEOUT = 5 ;
-    protected static final double INTERVAL = 1;
+    protected static final double DEFAULT_TIMEOUT = 200;
+    protected static final double INTERVAL = 50;
 
     // Número de processos
     protected int np;

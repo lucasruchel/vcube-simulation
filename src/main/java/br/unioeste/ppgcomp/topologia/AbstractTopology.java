@@ -33,6 +33,7 @@ public abstract class AbstractTopology {
     public int nextNeighboor(int me, int old){
         return -1;
     }
+    public abstract List<Integer> neighborhood(int p, int h);
 
 
 }

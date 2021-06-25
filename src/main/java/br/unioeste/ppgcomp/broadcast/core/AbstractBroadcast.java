@@ -2,20 +2,25 @@ package br.unioeste.ppgcomp.broadcast.core;
 
 import br.unioeste.ppgcomp.config.Parametros;
 import br.unioeste.ppgcomp.data.AtomicData;
+import br.unioeste.ppgcomp.data.BroadcastMessage;
+import br.unioeste.ppgcomp.data.Data;
 import br.unioeste.ppgcomp.fault.CrashProtocol;
 import br.unioeste.ppgcomp.topologia.AbstractTopology;
 import br.unioeste.ppgcomp.topologia.VCubeTopology;
 import lse.neko.*;
 import lse.neko.failureDetectors.FailureDetectorListener;
+import lse.neko.util.Timer;
 import lse.neko.util.TimerTask;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class AbstractBroadcast extends CrashProtocol implements FailureDetectorListener {
+public abstract class AbstractBroadcast<D> extends CrashProtocol implements FailureDetectorListener {
 
-    protected boolean DEBUG = true;
+    protected boolean DEBUG = false;
+
+    protected Timer timer;
 
     protected double DELAY = 0.1;
 
@@ -29,6 +34,7 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
 
     // Overlay dos processos para encaminhamento em árvore
     protected AbstractTopology topo;
+    private List<DataListener<D>> listeners;
 
     public AbstractBroadcast(NekoProcess process, SenderInterface sender, String name) {
         super(process, sender, name);
@@ -36,7 +42,7 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
         np = process.getN();
         me = process.getID();
 
-        corretos = new ArrayList<>();
+        corretos = new ArrayList<Integer>();
         for (int i = 0; i < np; i++) {
             corretos.add(i);
         }
@@ -44,6 +50,10 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
         dim = (int) (Math.log10(np)/Math.log10(2));
         topo = new VCubeTopology(dim);
         topo.setCorrects(corretos);
+
+        this.listeners = new ArrayList<>();
+
+        this.timer = NekoSystem.instance().getTimer();
     }
 
 
@@ -130,7 +140,18 @@ public abstract class AbstractBroadcast extends CrashProtocol implements Failure
 
         }
     }
+    protected void publish(BroadcastMessage<D> data){
+        for (DataListener l : listeners)
+            l.deliver(data);
+    }
 
+    public void addDataListener(DataListener listener){
+        listeners.add(listener);
+    }
+
+    public interface DataListener<D>{
+        void deliver(BroadcastMessage<D> data);
+    }
 }
 
 

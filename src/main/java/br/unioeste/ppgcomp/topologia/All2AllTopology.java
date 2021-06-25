@@ -28,4 +28,9 @@ public class All2AllTopology extends AbstractTopology{
 
         return new ArrayList<>();
     }
+
+    @Override
+    public List<Integer> neighborhood(int p, int h) {
+        return corrects;
+    }
 }

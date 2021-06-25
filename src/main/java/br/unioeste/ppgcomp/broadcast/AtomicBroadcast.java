@@ -18,6 +18,8 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
     private TreeSet<ACKMessage> pendingACK;
 
+    private List<Data> last_i;
+
 
     // Conjunto de mensagens que são marcadas para entrega, mas que precisam de ordenação
     private TreeSet<AtomicData> delivered;
@@ -52,6 +54,13 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
         this.lc = 0;
         this.topo = topo;
+
+        last_i = new ArrayList<>();
+        for (int i=0; i < np; i++){
+            last_i.add(null);
+        }
+
+
 
     }
 
@@ -114,23 +123,24 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
         // Processa ACK
         if (m.getType() == ACK){
-            ACKMessage receivedAck = (ACKMessage) m.getContent();
+            ACKMessage ack = (ACKMessage) m.getContent();
             int source = m.getSource();
 
-            ACKMessage ack = null;
-            for (ACKMessage pending : pendingACK){
-                if (pending.getRoot() == receivedAck.getRoot() &&
-                        pending.getId() == source &&
-                        pending.getData().equals(receivedAck.getData())
-                    ){
-                    ack = pending;
-                    break;
-                }
-            }
-            if (ack != null)
+//            ACKMessage ack = null;
+//            for (ACKMessage pending : pendingACK){
+//                if (pending.getRoot() == receivedAck.getRoot() &&
+//                        pending.getId() == source &&
+//                        pending.getData().equals(receivedAck.getData())
+//                    ){
+//                    ack = pending;
+//                    break;
+//                }
+//            }
+//            if (ack != null)
                 pendingACK.remove(ack);
 
-            if (ack != null && ack.getSource() != me)
+//            if (ack != null && ack.getSource() != me)
+            if (ack.getSource() != me)
                 checkAcks(ack.getSource(), ack.getData(),ack.getRoot());
 
             return;
@@ -274,7 +284,9 @@ public class AtomicBroadcast extends AbstractBroadcast {
         for (AtomicData m_ : deliverList) {
             delivered.add(m_);
 
-            if (DEBUG)
+            Data d = m_.getData();
+            publish(new BroadcastMessage(d.getData(),d.getSrc(),-1));
+//            if (DEBUG)
                 logger.info(String.format("p%s: delivered %s", me, m_.toString()) );
         }
     }
@@ -436,17 +448,20 @@ public class AtomicBroadcast extends AbstractBroadcast {
     @Override
     public void run() {
 
-        if (me == 0){
+//        if (me == 0){
             NekoSystem.instance().getTimer().schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    String message = "Dados"+me +"-c" + process.clock();
+                    String message = String.format("p%s:exec-%d",me,1);
+
                     Data m = new Data(me,message);
 
                     broadcast_tree(m);
                 }
-            }, me);
-        }
+            }, 400);
+//        }
 
     }
+
+
 }
