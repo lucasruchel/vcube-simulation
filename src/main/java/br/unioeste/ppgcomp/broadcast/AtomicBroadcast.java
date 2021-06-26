@@ -435,7 +435,7 @@ public class AtomicBroadcast extends AbstractBroadcast {
 
 
 
-    // Verifica se o processo P enviou todas as confirmações das mensagens
+    // Verifica se o processo P possui ACKs pendentes
     public boolean isPending(int p){
         for (ACKMessage ack : pendingACK){
             if (ack.getId() == p)

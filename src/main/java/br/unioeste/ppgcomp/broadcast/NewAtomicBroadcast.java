@@ -3,16 +3,14 @@ package br.unioeste.ppgcomp.broadcast;
 import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.data.*;
 import br.unioeste.ppgcomp.topologia.AbstractTopology;
-import com.google.common.collect.Maps;
 import lse.neko.*;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
 
 public class NewAtomicBroadcast<D> extends AbstractBroadcast {
 
@@ -20,7 +18,7 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
     private ConcurrentMap<BroadcastMessage<D>, TreeSet<Timestamp>> received;
 
 //    Mapa do conjunto de timestamps enviados a cada processo e o to, from de cada ACK
-    private ConcurrentMap<TreeMessage<D>, Map<Integer,Integer>> pendingAck;
+    private ConcurrentMap<TreeMessage<D>, ConcurrentMap<Integer,Integer>> pendingAck;
 
     private List<Integer> last_i;
 
@@ -42,9 +40,9 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
     public NewAtomicBroadcast(NekoProcess process, SenderInterface sender, String name, AbstractTopology topology) {
         super(process, sender, name);
 
-        stamped = Maps.newConcurrentMap();
-        received = Maps.newConcurrentMap();
-        pendingAck = Maps.newConcurrentMap();
+        stamped = new ConcurrentHashMap<>();
+        received = new ConcurrentHashMap<>();
+        pendingAck = new ConcurrentHashMap<>();
 
         last_i = new ArrayList<>();
         for (int i = 0; i < np; i++) {
@@ -136,6 +134,7 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
                 delay += DELAY;
             }
         }
+
 //      Adiciona todos os timestamps de tree recebidos
         if (received.get(data) != null){
             received.get(data).addAll(tsaggr);
@@ -160,10 +159,18 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
     }
 
     private void checkAcks(int src, TreeMessage<D> data) {
-        if (pendingAck.get(data) == null){
+        if ((pendingAck.get(data) == null || pendingAck.get(data).isEmpty()) && me != src){
             TreeSet<Timestamp> tsaggr = (TreeSet) data.getTsaggr();
-            if (tsaggr.last().getId() == me)
-                tsaggr.remove(tsaggr.last());
+
+            AtomicReference<Timestamp> ownTs = new AtomicReference<>();
+            tsaggr.forEach(timestamp -> {
+                if (timestamp.getId() == me){
+                    ownTs.set(timestamp);
+                }
+            });
+            if (ownTs.get() != null)
+                tsaggr.remove(ownTs.get());
+
 
             ACKPending<D> ack = new ACKPending<D>(data,me);
             NekoMessage m = new NekoMessage(new int[]{src},getId(),ack,ACK);
@@ -188,6 +195,9 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
         });
         TreeMessage<D> tree = fromTree.get();
 
+        if (process.clock() >= 251 )
+            System.out.println("teste");
+
         pendingAck.get(tree).remove(src);
 
 //        Remove pendência chave de pendingAcks
@@ -202,10 +212,15 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
     }
 
     private void checkDeliverable(BroadcastMessage data){
-        if (received.get(data) == null)
+        if (received.get(data) == null) // se não possui mensagens em received não pode ser entregue ou já foi marcada
             return;
 
-        boolean deliverable = false;
+        final AtomicBoolean deliverable = new AtomicBoolean(true);
+        pendingAck.forEach((tree, acks) -> {
+            if (tree.getData().equals(data) && !acks.isEmpty()){
+                deliverable.set(false);
+            }
+        });
 
 //       Verifica quantos processos suspeitos enviaram os seus timestamps
         AtomicInteger fault = new AtomicInteger(0);
@@ -215,19 +230,17 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
 ;            }
         });
 
-//        Verifica se foi recebido ao menos os timestamps de todos os processos corretos
-        if ((received.get(data).size() - fault.get()) >= topo.getCorrects().size()) {
-            deliverable = true;
+//        Verifica se é necessário obter os ts de mais processos
+        if ((received.get(data).size() - fault.get()) < topo.getCorrects().size()) {
+            deliverable.set(false);
         }
 
-        if (deliverable){
+        if (deliverable.get()){
 //            Maior ts adicionado ao TreeSet, a ordenação é baseada no valor de cada timestamp
             int sn = received.get(data).last().getTs();
 
             doDeliver(data, sn);
         }
-
-
     }
 
     private void doDeliver(BroadcastMessage data, int sn) {
@@ -236,14 +249,14 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
             stamped.put(data, sn);
         }
         // TODO Verificar com o Luiz essa parte, linha 42
-        if (data.getSeq() == last_i.get(data.getSrc())){
+        if (data.getSeq() == last_i.get(data.getSrc())+1){
             last_i.set(data.getSrc(), data.getSeq());
         }
 
 //      Remove todos as entradas associadas com a mensagem no received
         received.remove(data);
 
-        ConcurrentMap<BroadcastMessage<D>, Integer> deliverable = Maps.newConcurrentMap();
+        ConcurrentMap<BroadcastMessage<D>, Integer> deliverable = new ConcurrentHashMap<>();
         stamped.forEach((m_, ts_) -> {
             AtomicBoolean menor = new AtomicBoolean(true);
             received.forEach((m__, ts__) -> {
@@ -281,11 +294,50 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
         if (pendingAck.get(tree) != null) {
             pendingAck.get(tree).put(to,from);
         } else {
-            Map<Integer,Integer> acks = new HashMap<>();
+            ConcurrentMap<Integer,Integer> acks = new ConcurrentHashMap<>();
             acks.put(to,from);
 
             pendingAck.put(tree, acks);
         }
+    }
+
+    @Override
+    public void statusChange(boolean suspected, int p) {
+        super.statusChange(suspected,p);
+
+        if (isCrashed())
+            return;
+
+       if (suspected == false) // Se processo  não estiver suspeito nenhuma ação é necessária
+           return;
+
+        // Verifica para cada mensagem tree propagada, se os processos de destino correspondem ao processo suspeito
+        pendingAck.forEach((tree, acks) -> {
+             acks.forEach((dest, src) -> {
+                 if (dest == p && corretos.contains(src)){ // Se houver um ack do processo suspeito e o processo de origem estiver correto
+                     int nextNeighboor = ff_neighboor(me,cluster(me,p));
+                     if (nextNeighboor != -1) { // verifica se existem processos na árvore
+
+    //                     Nova mensagem a ser enviada, mesmo ts e dados recebidos ao próximo processo
+                         NekoMessage m = new NekoMessage(new int[]{nextNeighboor},getId(),tree.clone(),TREE);
+                         acks.put(nextNeighboor,src); // adiciona a nova mensagem como pendente
+
+                         timer.schedule(new SenderTask(m),DELAY);
+                     }
+                     acks.remove(dest,src);
+
+
+                     checkAcks(src,tree);
+                 }
+             });
+//                 limpa entradas vazias em pendingAcks
+            if (acks.isEmpty()) {
+                pendingAck.remove(tree,acks);
+            }
+
+        });
+//          Verifica se mensagens podem ser entregues, independente se houver ACks pendentes
+        received.forEach((abMsg, timestamps) -> checkDeliverable(abMsg));
     }
 
     @Override
@@ -303,12 +355,38 @@ public class NewAtomicBroadcast<D> extends AbstractBroadcast {
         }
 
     }
-
     public int cluster(int i, int j){
         return (MSB(i,j) + 1);
     }
 
+    public int ff_neighboor(int i, int s){
+        List<Integer> elements = new ArrayList<Integer>();
 
+        cis(elements, i, s);
+
+        // procura primeiro elemento no cluster J que seja livre de falhas
+        int n = 0;
+        do {
+            if (corretos.contains(elements.get(n)))
+                return elements.get(n);
+            n++;
+        } while (n < elements.size());
+
+        // Nenhum vizinho sem falha encontrado
+        return -1;
+    }
+
+    public void cis(List<Integer> elements, int id, int cluster){
+        // Primeiro elemento do cluster
+        int xor = id ^ (int)(Math.pow(2, cluster - 1));
+
+        // Adiciona elemento ao cluster
+        elements.add(xor);
+
+        for (int i = 1; i <= cluster - 1; i++) {
+            cis(elements,xor,i);
+        }
+    }
 
     public int MSB(int i, int j) {
         int s = 0;

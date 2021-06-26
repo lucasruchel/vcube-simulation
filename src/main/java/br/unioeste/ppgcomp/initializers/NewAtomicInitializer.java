@@ -50,7 +50,7 @@ public class NewAtomicInitializer implements NekoProcessInitializer {
             public void deliver(BroadcastMessage<String> data) {
                 int id = process.getID();
 
-                logger.info(String.format("p%d: data=%s",id,data.getData()));
+                logger.info(String.format("delivered p%d: data=%s at %s",id,data.getData(),process.clock()));
 
 //                if (exec <= 0 && id == 0 ){
 //                if (exec <= 1000 && (id == 0 || id == 1))
@@ -64,21 +64,27 @@ public class NewAtomicInitializer implements NekoProcessInitializer {
             }
         });
 
-//        if (process.getID() == 0)
-        NekoSystem.instance().getTimer().schedule(new TimerTask() {
+        if (process.getID() == 0)
+                NekoSystem.instance().getTimer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        logger.info("starting-experiment");
+                        atomic.broadcast(String.format("p%s:exec-%d",process.getID(),1));
+                    }
+                }, 200);
+
+        if (process.getID() == 6){
+            NekoSystem.instance().getTimer().schedule(new TimerTask() {
                 @Override
                 public void run() {
                     logger.info("starting-experiment");
                     atomic.broadcast(String.format("p%s:exec-%d",process.getID(),1));
                 }
             }, 200);
-
+        }
 
 
         fd.addListener(atomic);
-
-
-        //Inicia execução
         fd.launch();
         atomic.launch();
 
