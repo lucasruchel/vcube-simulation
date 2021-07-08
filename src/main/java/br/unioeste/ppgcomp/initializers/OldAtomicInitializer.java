@@ -1,6 +1,6 @@
 package br.unioeste.ppgcomp.initializers;
 
-import br.unioeste.ppgcomp.broadcast.AtomicBroadcast;
+import br.unioeste.ppgcomp.broadcast.OldAtomicBroadcast;
 import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.data.BroadcastMessage;
 import br.unioeste.ppgcomp.data.Data;
@@ -12,7 +12,7 @@ import lse.neko.NekoProcessInitializer;
 import lse.neko.SenderInterface;
 import org.apache.java.util.Configurations;
 
-public class VcubeAtomicInitializer implements NekoProcessInitializer {
+public class OldAtomicInitializer implements NekoProcessInitializer {
 
     public static final String PROTOCOL_NAME = "New-hiADSD";
     public static final String PROTOCOL_APP = "Atomic-Broadcast";
@@ -30,7 +30,7 @@ public class VcubeAtomicInitializer implements NekoProcessInitializer {
         AbstractTopology topology = new VCubeTopology(process.getN());
 
 
-        AtomicBroadcast atomic = new AtomicBroadcast(process,sender,PROTOCOL_APP,topology);
+        OldAtomicBroadcast atomic = new OldAtomicBroadcast(process,sender,PROTOCOL_APP,topology);
         atomic.setId(PROTOCOL_APP);
         atomic.addDataListener(new AbstractBroadcast.DataListener<String>() {
             int exec = 1;

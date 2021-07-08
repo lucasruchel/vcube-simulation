@@ -1,10 +1,8 @@
 package br.unioeste.ppgcomp.initializers;
 
 import br.unioeste.ppgcomp.broadcast.AtomicBroadcast;
-import br.unioeste.ppgcomp.broadcast.NewAtomicBroadcast;
 import br.unioeste.ppgcomp.broadcast.core.AbstractBroadcast;
 import br.unioeste.ppgcomp.data.BroadcastMessage;
-import br.unioeste.ppgcomp.data.Data;
 import br.unioeste.ppgcomp.fd.VCubeFD;
 import br.unioeste.ppgcomp.topologia.AbstractTopology;
 import br.unioeste.ppgcomp.topologia.VCubeTopology;
@@ -18,7 +16,7 @@ import org.apache.java.util.Configurations;
 
 import java.util.logging.Logger;
 
-public class NewAtomicInitializer implements NekoProcessInitializer {
+public class AtomicInitializer implements NekoProcessInitializer {
 
     public static final String PROTOCOL_NAME = "New-hiADSD";
     public static final String PROTOCOL_APP = "New-Broadcast";
@@ -42,7 +40,7 @@ public class NewAtomicInitializer implements NekoProcessInitializer {
         Logger logger = NekoLogger.getLogger("messages");
 
 
-        NewAtomicBroadcast<String> atomic = new NewAtomicBroadcast(process,sender,PROTOCOL_APP,topology);
+        AtomicBroadcast<String> atomic = new AtomicBroadcast(process,sender,PROTOCOL_APP,topology);
         atomic.setId(PROTOCOL_APP);
         atomic.addDataListener(new AbstractBroadcast.DataListener<String>() {
             int exec = 1;
@@ -52,8 +50,7 @@ public class NewAtomicInitializer implements NekoProcessInitializer {
 
                 logger.info(String.format("delivered p%d: data=%s at %s",id,data.getData(),process.clock()));
 
-//                if (exec <= 0 && id == 0 ){
-//                if (exec <= 1000 && (id == 0 || id == 1))
+
                 if (exec < executions && data.getSrc() == id){
                     String m = String.format("p%s:exec-%d",id,++exec);
                     atomic.broadcast(m);
@@ -64,25 +61,14 @@ public class NewAtomicInitializer implements NekoProcessInitializer {
             }
         });
 
-        if (process.getID() == 0)
-                NekoSystem.instance().getTimer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        logger.info("starting-experiment");
-                        atomic.broadcast(String.format("p%s:exec-%d",process.getID(),1));
-                    }
-                }, 200);
-
-        if (process.getID() == 6){
-            NekoSystem.instance().getTimer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    logger.info("starting-experiment");
-                    atomic.broadcast(String.format("p%s:exec-%d",process.getID(),1));
-                }
-            }, 200);
-        }
-
+//        if (process.getID() == 1)
+        NekoSystem.instance().getTimer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                logger.info("starting-experiment");
+                atomic.broadcast(String.format("p%s:exec-%d",process.getID(),1));
+            }
+        }, 200);
 
         fd.addListener(atomic);
         fd.launch();

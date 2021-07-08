@@ -1,12 +1,10 @@
 package br.unioeste.ppgcomp.initializers;
 
-import br.unioeste.ppgcomp.broadcast.AtomicBroadcast;
+import br.unioeste.ppgcomp.broadcast.OldAtomicBroadcast;
 import br.unioeste.ppgcomp.fd.AbstractFailureDetector;
 import br.unioeste.ppgcomp.fd.AllToAllFD;
-import br.unioeste.ppgcomp.fd.VCubeFD;
 import br.unioeste.ppgcomp.topologia.AbstractTopology;
 import br.unioeste.ppgcomp.topologia.All2AllTopology;
-import br.unioeste.ppgcomp.topologia.VCubeTopology;
 import lse.neko.NekoProcess;
 import lse.neko.NekoProcessInitializer;
 import lse.neko.SenderInterface;
@@ -30,7 +28,7 @@ public class All2AllAtomicInitializer implements NekoProcessInitializer {
         AbstractTopology topology = new All2AllTopology(process.getN());
 
 
-        AtomicBroadcast atomic = new AtomicBroadcast(process,sender,PROTOCOL_APP,topology);
+        OldAtomicBroadcast atomic = new OldAtomicBroadcast(process,sender,PROTOCOL_APP,topology);
         atomic.setId(PROTOCOL_APP);
 
 
