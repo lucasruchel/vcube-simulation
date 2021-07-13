@@ -66,4 +66,5 @@ public class VCubeFD extends AbstractFailureDetector {
             }
         }
     }
+
 }

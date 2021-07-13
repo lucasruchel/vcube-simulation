@@ -83,9 +83,7 @@ public class AtomicBroadcast<D> extends AbstractBroadcast {
             NekoMessage m = new NekoMessage(me,new int[]{i},getId(),tree,TREE);
             addAck(tree.getFrom(),i,tree);
 
-            timer.schedule(new SenderTask(m),delay);
-
-            delay+=DELAY;
+            send(m);
         }
 
     }
@@ -129,7 +127,7 @@ public class AtomicBroadcast<D> extends AbstractBroadcast {
                 TreeMessage<D> replay = new TreeMessage<>(data,me,re_ts);
                 NekoMessage m_ = new NekoMessage(me,new int[]{i},getId(),replay,TREE);
 
-                timer.schedule(new SenderTask(m_),delay);
+                send(m_);
                 addAck(me,i,replay);
 
                 delay += DELAY;
@@ -185,7 +183,7 @@ public class AtomicBroadcast<D> extends AbstractBroadcast {
             ACKPending<D> ack = new ACKPending<D>(toSend,me);
             NekoMessage m = new NekoMessage(new int[]{src},getId(),ack,ACK);
 
-            NekoSystem.instance().getTimer().schedule(new SenderTask(m),DELAY);
+            send(m);
         }
     }
 
@@ -339,7 +337,7 @@ public class AtomicBroadcast<D> extends AbstractBroadcast {
                          NekoMessage m = new NekoMessage(new int[]{nextNeighboor},getId(),tree.clone(),TREE);
                          acks.put(nextNeighboor,src); // adiciona a nova mensagem como pendente
 
-                         timer.schedule(new SenderTask(m),DELAY);
+                         send(m);
                      }
                      acks.remove(dest,src);
                      checkAcks(src,tree);
@@ -355,7 +353,7 @@ public class AtomicBroadcast<D> extends AbstractBroadcast {
     }
 
     @Override
-    public void deliverMessage(NekoMessage m) {
+    public void doDeliver(NekoMessage m) {
         int type = m.getType();
         switch (type){
             case TREE:
@@ -411,4 +409,6 @@ public class AtomicBroadcast<D> extends AbstractBroadcast {
     public void run() {
 
     }
+
+
 }

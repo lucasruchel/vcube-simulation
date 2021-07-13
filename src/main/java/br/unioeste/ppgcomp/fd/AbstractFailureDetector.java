@@ -200,51 +200,7 @@ public abstract class AbstractFailureDetector extends CrashProtocol {
     }
 
     @Override
-    public void deliver(NekoMessage m) {
-        deliverMessage(m);
-
-        super.deliver(m);
-    }
-
-    protected class SenderTask extends TimerTask {
-        private NekoMessage m;
-        public SenderTask(NekoMessage m) {
-            this.m = m;
-        }
-
-        @Override
-        public void run() {
-            if (!isCrashed()){
-                if (DEBUG) {
-                    System.out.println(process.clock() + " " + process.getID() + " s " + m);
-                }
-
-               sender.send(m);
-            }
-
-        }
-    }
-
-    class DeliverTask extends TimerTask{
-        private NekoMessage m;
-
-        public DeliverTask(NekoMessage m){
-            this.m = m;
-        }
-
-        @Override
-        public void run() {
-            if (!isCrashed()){
-                if (DEBUG) {
-                    System.out.println(process.clock() + " " + process.getID() + " s " + m);
-                }
-
-                deliverMessage(m);
-            }
-        }
-    }
-
-    public void deliverMessage(NekoMessage m){
+    public void doDeliver(NekoMessage m){
         if (isCrashed())
             return;
 

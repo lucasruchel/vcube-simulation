@@ -14,6 +14,8 @@ import lse.neko.util.TimerTask;
 import lse.neko.util.logging.NekoLogger;
 import org.apache.java.util.Configurations;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class AtomicInitializer implements NekoProcessInitializer {
@@ -21,11 +23,17 @@ public class AtomicInitializer implements NekoProcessInitializer {
     public static final String PROTOCOL_NAME = "New-hiADSD";
     public static final String PROTOCOL_APP = "New-Broadcast";
 
-    public void init(NekoProcess process, Configurations config) throws Exception {
-        int messages = config.getInteger("messages.number",1);
-        // Cada processa envia um conjunto de mensagens
-        int executions = messages / process.getN();
+    private int counter = 0;
+    private int clients = 256;
 
+    private Set<String> messages;
+
+
+    public void init(NekoProcess process, Configurations config) throws Exception {
+        // Cada processa envia um conjunto de mensagens
+        int executions = config.getInteger("messages.number",1);
+
+        messages = new HashSet<>();
 
         // Tipo de rede definido nos arquivos de configuração
         SenderInterface sender = process.getDefaultNetwork();
@@ -42,22 +50,32 @@ public class AtomicInitializer implements NekoProcessInitializer {
 
         AtomicBroadcast<String> atomic = new AtomicBroadcast(process,sender,PROTOCOL_APP,topology);
         atomic.setId(PROTOCOL_APP);
+
+        int id = process.getID();
+
         atomic.addDataListener(new AbstractBroadcast.DataListener<String>() {
             int exec = 1;
             @Override
             public void deliver(BroadcastMessage<String> data) {
-                int id = process.getID();
 
-                logger.info(String.format("delivered p%d: data=%s at %s",id,data.getData(),process.clock()));
+                logger.info(String.format("p%s:entregue:%s at %s",id, data.getData(),process.clock()) );
 
 
-                if (exec < executions && data.getSrc() == id){
-                    String m = String.format("p%s:exec-%d",id,++exec);
-                    atomic.broadcast(m);
-                } else if (exec >= executions && data.getSrc() == id){
-                    logger.info("Finished-experiment");
+                if (messages.contains(data.getData())){
+                    messages.remove(data.getData());
                 }
+                //                Ainda existem mensagens para serem enviadas por cada processo
+//                E as mensagens anteriores enviadas já foram entregues.
+//                if (process.getID() == 6)
+                if (counter < executions && messages.size() == 0) {
+                    for (int i = 0; i < clients; i++) {
+                        counter++;
+                        String raw = String.format("p%d:exec-%d-cli-%s", id, counter, i);
+                        messages.add(raw);
+                        atomic.broadcast(raw);
+                    }
 
+                }
             }
         });
 
@@ -65,8 +83,15 @@ public class AtomicInitializer implements NekoProcessInitializer {
         NekoSystem.instance().getTimer().schedule(new TimerTask() {
             @Override
             public void run() {
-                logger.info("starting-experiment");
-                atomic.broadcast(String.format("p%s:exec-%d",process.getID(),1));
+//                logger.info("starting-experiment");
+                counter++;
+                for (int i=0; i < clients; i++){
+                    String data = String.format("p%d:exec-%d-cli-%s",id,counter,i);
+                    messages.add(data);
+                    atomic.broadcast(data);
+                }
+
+
             }
         }, 200);
 

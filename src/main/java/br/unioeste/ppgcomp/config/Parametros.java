@@ -1,6 +1,7 @@
 package br.unioeste.ppgcomp.config;
 
 public interface Parametros {
-    double RT = 0.1;
-    boolean DEBUG = false;
+    double TR = 0.1;
+    double TS = 0.1;
+    boolean DEBUG = true;
 }

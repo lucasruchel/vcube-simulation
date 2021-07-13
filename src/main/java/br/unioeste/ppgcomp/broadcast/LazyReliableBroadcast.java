@@ -54,7 +54,7 @@ public class LazyReliableBroadcast extends AbstractBroadcast {
 
 
     @Override
-    public void deliverMessage(NekoMessage brcast) {
+    public void doDeliver(NekoMessage brcast) {
         NekoMessage m = (NekoMessage) brcast.getContent();
 
         if (!delivered.contains(m)){

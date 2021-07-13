@@ -117,7 +117,7 @@ public class OldAtomicBroadcast extends AbstractBroadcast {
 
 
     @Override
-    public void deliverMessage(NekoMessage m) {
+    public void doDeliver(NekoMessage m) {
         if (isCrashed())
             return;
 
@@ -462,6 +462,5 @@ public class OldAtomicBroadcast extends AbstractBroadcast {
 //        }
 
     }
-
 
 }

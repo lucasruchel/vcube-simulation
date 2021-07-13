@@ -3,7 +3,6 @@ package br.unioeste.ppgcomp.broadcast.core;
 import br.unioeste.ppgcomp.config.Parametros;
 import br.unioeste.ppgcomp.data.AtomicData;
 import br.unioeste.ppgcomp.data.BroadcastMessage;
-import br.unioeste.ppgcomp.data.Data;
 import br.unioeste.ppgcomp.fault.CrashProtocol;
 import br.unioeste.ppgcomp.topologia.AbstractTopology;
 import br.unioeste.ppgcomp.topologia.VCubeTopology;
@@ -60,56 +59,15 @@ public abstract class AbstractBroadcast<D> extends CrashProtocol implements Fail
 
 
 
-    protected class SenderTask extends TimerTask{
-        private NekoMessage m;
-        public SenderTask(NekoMessage m) {
-            this.m = m;
-        }
 
-        @Override
-        public void run() {
-            if (!isCrashed()){
-                if (DEBUG) {
-                    System.out.println(process.clock() + " " + process.getID() + " s " + m);
-                }
 
-                send(this.m);
-            }
 
-        }
-    }
-
-    class DeliverTask extends TimerTask{
-        private NekoMessage m;
-
-        public DeliverTask(NekoMessage m){
-            this.m = m;
-        }
-
-        @Override
-        public void run() {
-            if (!isCrashed()){
-                if (DEBUG) {
-                    System.out.println(process.clock() + " " + process.getID() + " s " + m);
-                }
-
-                deliverMessage(m);
-            }
-        }
-    }
-
-    public abstract void deliverMessage(NekoMessage m);
 
     @Override
     public void deliver(NekoMessage m) {
-        NekoSystem.instance().getTimer().schedule(new DeliverTask(m), Parametros.RT);
+        NekoSystem.instance().getTimer().schedule(new DeliverTask(m), Parametros.TR);
     }
 
-    public void send(NekoMessage m) {
-        if (!isCrashed()){
-            broadcast(m);
-        }
-    }
 
     public void broadcast(NekoMessage m){
         sender.send(m);

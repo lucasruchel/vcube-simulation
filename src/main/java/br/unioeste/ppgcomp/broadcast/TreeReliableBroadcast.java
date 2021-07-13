@@ -58,6 +58,8 @@ public class TreeReliableBroadcast extends AbstractBroadcast {
         vcube.setCorrects(corrects);
     }
 
+
+
     public void broadcast(TreeData data){
         List<Integer> dests = vcube.neighborhood(data.getSource(),log2(np));
 
@@ -179,7 +181,7 @@ public class TreeReliableBroadcast extends AbstractBroadcast {
 
 
     @Override
-    public void deliverMessage(NekoMessage m) {
+    public void doDeliver(NekoMessage m) {
         if (isCrashed())
             return;
 
